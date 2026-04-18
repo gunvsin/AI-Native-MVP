@@ -1,0 +1,14 @@
+[debug] [2026-04-18T11:49:20.657Z] ----------------------------------------------------------------------
+[debug] [2026-04-18T11:49:20.660Z] Command:       /nix/store/ws50yvm6vzlzf7jzz6n7xh4szddrack1-nodejs-20.19.1/bin/node /nix/store/gm9mcvzb17vv8cla08khrg29vxn3sq4r-firebase-tools-15.1.0/lib/node_modules/firebase-tools/lib/bin/firebase.js use --add
+[debug] [2026-04-18T11:49:20.660Z] CLI Version:   15.1.0
+[debug] [2026-04-18T11:49:20.660Z] Platform:      linux
+[debug] [2026-04-18T11:49:20.660Z] Node Version:  v20.19.1
+[debug] [2026-04-18T11:49:20.660Z] Time:          Sat Apr 18 2026 11:49:20 GMT+0000 (Coordinated Universal Time)
+[debug] [2026-04-18T11:49:20.661Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-04-18T11:49:21.113Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2026-04-18T11:49:47.630Z] Running auto auth
+[debug] [2026-04-18T11:49:47.652Z] No OAuth tokens found
+[debug] [2026-04-18T11:49:47.656Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2026-04-18T11:49:48.237Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-04-18T11:49:48.237Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]

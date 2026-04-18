@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "genkit": "^1.32.0",
+    "genkit-cli": "^1.32.0"
+  }
+}

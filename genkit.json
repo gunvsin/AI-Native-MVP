@@ -1,0 +1,17 @@
+{
+  "plugins": [
+    {
+      "plugin": "googleAI",
+      "options": {
+        "apiKey": "${GOOGLE_GENAI_API_KEY}"
+      }
+    }
+  ],
+  "models": {
+    "gemini-1.5-flash": {
+      "model": "googleAI/gemini-1.5-flash-latest"
+    }
+  },
+  "flowStateStore": "firebase",
+  "traceStore": "firebase"
+}
