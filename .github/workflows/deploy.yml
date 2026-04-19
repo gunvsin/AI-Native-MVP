@@ -1,5 +1,4 @@
-
-name: Deploy to Google Cloud and Firebase
+name: Deploy to Google Cloud
 
 on:
   push:
@@ -8,71 +7,47 @@ on:
 
 jobs:
   deploy-backend:
-    name: Deploy Backend to Cloud Run
-    runs-on: ubuntu-latest
     permissions:
       contents: 'read'
       id-token: 'write'
-
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Authenticate to Google Cloud
-        id: auth
-        uses: google-github-actions/auth@v2
+      - uses: actions/checkout@v3
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
         with:
-          workload_identity_provider: 'YOUR_WIF_PROVIDER'
-          service_account: 'YOUR_SERVICE_ACCOUNT'
+          workload_identity_provider: 'projects/511017089544/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider'
+          service_account: 'github-actions-runner@ai-finance-mvp.iam.gserviceaccount.com'
 
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
-
-      - name: Configure Docker
-        run: gcloud auth configure-docker us-central1-docker.pkg.dev
-
-      - name: Build and push Docker image
-        run: |
-          docker build -t us-central1-docker.pkg.dev/YOUR_PROJECT_ID/my-app-backend:latest .
-          docker push us-central1-docker.pkg.dev/YOUR_PROJECT_ID/my-app-backend:latest
-
-      - name: Deploy to Cloud Run
-        run: |
-          gcloud run deploy my-backend-service \
-            --image us-central1-docker.pkg.dev/YOUR_PROJECT_ID/my-app-backend:latest \
-            --region us-central1 \
-            --platform managed \
-            --allow-unauthenticated
+      - name: Build and Deploy to Cloud Run
+        uses: 'google-github-actions/deploy-cloudrun@v1'
+        with:
+          service: 'my-backend-api'
+          region: 'us-central1'
+          source: '.'
 
   deploy-frontend:
-    name: Deploy Frontend to Firebase Hosting
-    runs-on: ubuntu-latest
     permissions:
       contents: 'read'
       id-token: 'write'
-
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Authenticate to Google Cloud
-        id: auth
-        uses: google-github-actions/auth@v2
+      - uses: actions/checkout@v3
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
         with:
-          workload_identity_provider: 'YOUR_WIF_PROVIDER'
-          service_account: 'YOUR_SERVICE_ACCOUNT'
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install dependencies and build
+          workload_identity_provider: 'projects/511017089544/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider'
+          service_account: 'github-actions-runner@ai-finance-mvp.iam.gserviceaccount.com'
+      
+      # This build step might need to be adjusted if your frontend code is not in the root
+      # or if it uses a different build command.
+      - name: Build Frontend
         run: npm install && npm run build
-
+        
       - name: Deploy to Firebase Hosting
-        uses: firebase-tools/action-hosting-deploy@v0
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          projectId: 'YOUR_PROJECT_ID'
-          channelId: live
-          target: your-firebase-hosting-target # Optional: specify a target if you have multiple sites
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          projectId: 'ai-finance-mvp'
+          # By authenticating with the 'auth' step above, 
+          # we no longer need to provide a service account key here.

@@ -1,13 +1,15 @@
-import { configureGenkit } from '@genkit-ai/core';
+import { configureGenkit } from 'genkit';
 import { firebase } from '@genkit-ai/firebase';
-import { googleAI } from '@genkit-ai/googleai';
-import { defineFlow, startFlows } from '@genkit-ai/flow';
+import { googleGenai, geminiPro } from '@genkit-ai/google-genai';
+import { defineFlow } from '@genkit-ai/flow';
+import { generate } from '@genkit-ai/ai';
 import * as z from 'zod';
+import { onFlow } from '@genkit-ai/firebase/functions';
 
 configureGenkit({
   plugins: [
     firebase(),
-    googleAI({ apiKey: process.env.GOOGLE_GENAI_API_KEY }),
+    googleGenai(),
   ],
   logLevel: 'debug',
   enableTracingAndMetrics: true,
@@ -19,10 +21,14 @@ export const summaryFlow = defineFlow(
     inputSchema: z.string(),
     outputSchema: z.string(),
   },
-  async (prompt) => {
-    // TODO: Implement the flow logic here
-    return `Summary of "${prompt}"`;
+  async (textToSummarize) => {
+    const llmResponse = await generate({
+      model: geminiPro,
+      prompt: `Please provide a concise summary of the following text: ${textToSummarize}`,
+    });
+
+    return llmResponse.text();
   }
 );
 
-startFlows();
+export const summary = onFlow(summaryFlow, {});
