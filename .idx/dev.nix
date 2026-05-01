@@ -8,7 +8,9 @@
     # pkgs.go
     # pkgs.python311
     # pkgs.python311Packages.pip
-    # pkgs.nodejs_22
+    pkgs.nodejs_22
+    pkgs.nodePackages.jest
+    pkgs.nodePackages.ts-jest
     # pkgs.nodePackages.nodemon
   ];
   # Sets environment variables in the workspace
@@ -18,6 +20,7 @@
     extensions = [
       # "vscodevim.vim"
       "google.gemini-cli-vscode-ide-companion"
+      "dbaeumer.vscode-eslint"
     ];
     # Enable previews
     previews = {
