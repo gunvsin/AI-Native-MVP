@@ -10,11 +10,11 @@
     # pkgs.python311Packages.pip
     pkgs.nodejs_22
     pkgs.nodePackages.jest
-    pkgs.nodePackages."ts-jest"
     # pkgs.nodePackages.nodemon
   ];
   # Sets environment variables in the workspace
-  env = {};
+  env = {
+  };
   idx = {
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
     extensions = [
@@ -39,7 +39,7 @@
       # Runs when the workspace is first created
       onCreate = {
         # Example: install dependencies with npm
-        # npm-install = "npm install";
+        npm-install = "npm install";
       };
       # Runs every time the workspace is (re)started
       onStart = {
