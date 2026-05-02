@@ -1,15 +1,17 @@
-'use client';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 const AxeAccessibility = () => {
+  if (process.env.NODE_ENV !== 'development') {
+    return null;
+  }
+
   React.useEffect(() => {
-    if (process.env.NODE_ENV !== 'production') {
-      import('@axe-core/react').then((axe) => {
-        axe.default(React, ReactDOM, 1000);
-      });
-    }
+    const runAxe = async () => {
+      const axe = await (await import('@axe-core/react')).default;
+      axe(React, ReactDOM, 1000);
+    };
+    runAxe();
   }, []);
 
   return null;

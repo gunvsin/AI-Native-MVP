@@ -8,7 +8,7 @@
     pkgs.nodejs_22
     pkgs.nodePackages.npm
     # Added firebase-tools to run the emulators
-    pkgs.firebase-tools 
+    pkgs.firebase-tools
   ];
 
   # Sets environment variables in the workspace.
@@ -17,7 +17,7 @@
   idx = {
     # Search for extensions on https://open-vsx.org/.
     extensions = [
-      "google.gemini-cli-vscode-ide-companion",
+      "google.gemini-cli-vscode-ide-companion"
       "dbaeumer.vscode-eslint"
     ];
 
@@ -43,9 +43,8 @@
       };
       # Runs every time the workspace is (re)started.
       onStart = {
-        # Start the Firebase emulators and the Next.js dev server.
+        # Start the Firebase emulators, which are used by the client application.
         start-emulators = "npm run serve --prefix functions";
-        start-next-dev = "npm run dev --prefix client";
       };
     };
   };
