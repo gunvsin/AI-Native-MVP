@@ -1,13 +1,9 @@
-{ pkgs, ... }: {
-  # To learn more about how to use Nix to configure your environment
-  # see: https://developers.google.com/idx/guides/customize-idx-env
-  channel = "stable-24.11"; # Which nixpkgs channel to use.
 
-  # Use https://search.nixos.org/packages to find packages.
+{ pkgs, ... }: {
+  # The Nix packages available in your workspace
+  # Search for packages on https://search.nixos.org/packages
   packages = [
     pkgs.nodejs_22
-    pkgs.nodePackages.npm
-    # Added firebase-tools to run the emulators
     pkgs.firebase-tools
   ];
 
@@ -21,30 +17,36 @@
       "dbaeumer.vscode-eslint"
     ];
 
-    # The web preview configuration.
+    # Workspace lifecycle hooks
+    workspace = {
+      # Runs when a workspace is first created
+      onCreate = {
+        install-client = "cd client && npm install";
+        install-functions = "cd functions && npm install";
+      };
+      # Runs on every workspace start
+      onStart = {};
+    };
+
+    # Web-based previews
     previews = {
       enable = true;
       previews = {
+        # The web preview for the Next.js client application
         web = {
-          # This command starts the Next.js development server from the `client` directory
-          command = ["npm", "run", "dev", "--prefix", "client", "--", "--port", "$PORT"];
+          command = [
+            "npm"
+            "run"
+            "dev"
+            "--"
+            "--port"
+            "$PORT"
+            "--hostname"
+            "0.0.0.0"
+          ];
+          cwd = "client";
           manager = "web";
         };
-      };
-    };
-
-    # Workspace lifecycle hooks.
-    workspace = {
-      # Runs when a workspace is first created.
-      onCreate = {
-        # Install dependencies for both the functions and client.
-        npm-install-functions = "npm install --prefix functions";
-        npm-install-client = "npm install --prefix client";
-      };
-      # Runs every time the workspace is (re)started.
-      onStart = {
-        # Start the Firebase emulators, which are used by the client application.
-        start-emulators = "npm run serve --prefix functions";
       };
     };
   };

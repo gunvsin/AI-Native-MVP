@@ -39,6 +39,7 @@
     "jest-axe": "^10.0.0",
     "jest-environment-jsdom": "^30.3.0",
     "msw": "^2.14.2",
+    "null-loader": "^4.0.1",
     "ts-jest": "^29.1.5",
     "typescript": "^5",
     "vitest": "^1.6.0",

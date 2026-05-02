@@ -1,4 +1,17 @@
 {
+  "app/page.js -> ../components/FinancialSummaryCard/FinancialSummaryCard": {
+    "id": 3860,
+    "files": [
+      "static/css/d7154690477d69b9.css",
+      "static/chunks/860.2edfd060adeeae9a.js"
+    ]
+  },
+  "app/page.js -> ../components/NetworkModeToggle/NetworkModeToggle": {
+    "id": 4464,
+    "files": [
+      "static/chunks/464.1b0be9b145b02103.js"
+    ]
+  },
   "components/AxeAccessibility.js -> @axe-core/react": {
     "id": 3162,
     "files": [

@@ -1,0 +1,1 @@
+(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[860],{3860:function(n,a,c){"use strict";c.r(a);var e=c(7437);c(2265),c(2720),a.default=n=>{let{summaryText:a}=n;return(0,e.jsxs)("div",{className:"financial-summary-card",children:[(0,e.jsx)("h3",{children:"Financial Summary"}),(0,e.jsx)("p",{children:a})]})}},2720:function(){}}]);

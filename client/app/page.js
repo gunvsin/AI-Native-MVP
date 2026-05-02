@@ -1,83 +1,82 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+
+"use client";
+
+import styles from "./page.module.css";
+import dynamic from 'next/dynamic';
+
+// Dynamically import components and disable SSR to prevent build errors
+const NetworkModeToggle = dynamic(
+  () => import('../components/NetworkModeToggle/NetworkModeToggle'),
+  { ssr: false }
+);
+
+const FinancialSummaryCard = dynamic(
+  () => import('../components/FinancialSummaryCard/FinancialSummaryCard'),
+  { ssr: false }
+);
 
 export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
         <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
+          Financial Guardian Prototype
         </p>
         <div>
           <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+            href="https://firebase.google.com/docs/genkit"
             target="_blank"
             rel="noopener noreferrer"
           >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
+            By
+            Build with Google
           </a>
         </div>
       </div>
 
       <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+        <FinancialSummaryCard summaryText={'Loading summary...'} />
       </div>
 
       <div className={styles.grid}>
         <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          href="https://github.com/firebase/genkit/tree/main/sample"
           className={styles.card}
           target="_blank"
           rel="noopener noreferrer"
         >
           <h2>
-            Docs <span>-&gt;</span>
+            Genkit Samples <span>-&gt;</span>
           </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
+          <p>Explore more Genkit features and integrations.</p>
         </a>
 
         <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          href="https://firebase.google.com/docs/rules"
           className={styles.card}
           target="_blank"
           rel="noopener noreferrer"
         >
           <h2>
-            Learn <span>-&gt;</span>
+            Security Rules <span>-&gt;</span>
           </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
+          <p>Learn how to secure your Firestore database.</p>
         </a>
 
         <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          href="https://www.npmjs.com/package/langchain"
           className={styles.card}
           target="_blank"
           rel="noopener noreferrer"
         >
           <h2>
-            Templates <span>-&gt;</span>
+            LangChain <span>-&gt;</span>
           </h2>
-          <p>Explore starter templates for Next.js.</p>
+          <p>Discover the power of the LangChain framework.</p>
         </a>
 
         <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=app&utm_campaign=create-next-app-readme"
           className={styles.card}
           target="_blank"
           rel="noopener noreferrer"
@@ -90,6 +89,7 @@ export default function Home() {
           </p>
         </a>
       </div>
+      <NetworkModeToggle />
     </main>
-  )
+  );
 }
