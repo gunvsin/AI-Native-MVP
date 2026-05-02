@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="71" failures="0" errors="0" time="23.88">
+  <testsuite name="Performance &amp; Scalability Tests" errors="0" failures="0" skipped="0" timestamp="2026-04-23T07:54:55" time="12.943" tests="3">
+    <testcase classname="Performance &amp; Scalability Tests should handle a high volume of concurrent API requests without performance degradation" name="Performance &amp; Scalability Tests should handle a high volume of concurrent API requests without performance degradation" time="0.225">
+    </testcase>
+    <testcase classname="Performance &amp; Scalability Tests should maintain API response times below a defined threshold under load" name="Performance &amp; Scalability Tests should maintain API response times below a defined threshold under load" time="0.011">
+    </testcase>
+    <testcase classname="Performance &amp; Scalability Tests should efficiently process large volumes of financial data" name="Performance &amp; Scalability Tests should efficiently process large volumes of financial data" time="0.026">
+    </testcase>
+  </testsuite>
+  <testsuite name="API Endpoint &amp; Integration Testing" errors="0" failures="0" skipped="0" timestamp="2026-04-23T07:55:08" time="2.004" tests="5">
+    <testcase classname="API Endpoint &amp; Integration Testing GET /api/config/theme - should return the correct Sovereign Ledger color palette" name="API Endpoint &amp; Integration Testing GET /api/config/theme - should return the correct Sovereign Ledger color palette" time="0.007">
+    </testcase>
+    <testcase classname="API Endpoint &amp; Integration Testing POST /submit - should reject unauthenticated requests" name="API Endpoint &amp; Integration Testing POST /submit - should reject unauthenticated requests" time="0.013">
+    </testcase>
+    <testcase classname="API Endpoint &amp; Integration Testing POST /submit - should reject invalid data with a Zod error message" name="API Endpoint &amp; Integration Testing POST /submit - should reject invalid data with a Zod error message" time="0.003">
+    </testcase>
+    <testcase classname="API Endpoint &amp; Integration Testing POST /submit - should accept valid data and start async processing" name="API Endpoint &amp; Integration Testing POST /submit - should accept valid data and start async processing" time="0.004">
+    </testcase>
+    <testcase classname="API Endpoint &amp; Integration Testing GET /status &amp; /data - should correctly report the lifecycle of a verification" name="API Endpoint &amp; Integration Testing GET /status &amp; /data - should correctly report the lifecycle of a verification" time="0.16">
+    </testcase>
+  </testsuite>
+  <testsuite name="Sample Data APIs" errors="0" failures="0" skipped="0" timestamp="2026-04-23T07:55:10" time="0.951" tests="18">
+    <testcase classname="Sample Data APIs Simple Data Types (Structured) should return a string from /string" name="Sample Data APIs Simple Data Types (Structured) should return a string from /string" time="0.006">
+    </testcase>
+    <testcase classname="Sample Data APIs Simple Data Types (Structured) should return a number from /number" name="Sample Data APIs Simple Data Types (Structured) should return a number from /number" time="0.002">
+    </testcase>
+    <testcase classname="Sample Data APIs Simple Data Types (Structured) should return a boolean from /boolean" name="Sample Data APIs Simple Data Types (Structured) should return a boolean from /boolean" time="0.002">
+    </testcase>
+    <testcase classname="Sample Data APIs Simple Structures (Structured) should return an array from /array" name="Sample Data APIs Simple Structures (Structured) should return an array from /array" time="0.002">
+    </testcase>
+    <testcase classname="Sample Data APIs Simple Structures (Structured) should return an object from /object" name="Sample Data APIs Simple Structures (Structured) should return an object from /object" time="0.002">
+    </testcase>
+    <testcase classname="Sample Data APIs Nested/Complex Structures (Structured) should accept a valid nested object" name="Sample Data APIs Nested/Complex Structures (Structured) should accept a valid nested object" time="0.006">
+    </testcase>
+    <testcase classname="Sample Data APIs Nested/Complex Structures (Structured) should reject an invalid nested object" name="Sample Data APIs Nested/Complex Structures (Structured) should reject an invalid nested object" time="0.002">
+    </testcase>
+    <testcase classname="Sample Data APIs Path and Query Parameters should get an item by ID" name="Sample Data APIs Path and Query Parameters should get an item by ID" time="0.003">
+    </testcase>
+    <testcase classname="Sample Data APIs Path and Query Parameters should return 404 for a non-existent item" name="Sample Data APIs Path and Query Parameters should return 404 for a non-existent item" time="0.003">
+    </testcase>
+    <testcase classname="Sample Data APIs Path and Query Parameters should search for items by tag" name="Sample Data APIs Path and Query Parameters should search for items by tag" time="0.005">
+    </testcase>
+    <testcase classname="Sample Data APIs Path and Query Parameters should return an error if tag is missing" name="Sample Data APIs Path and Query Parameters should return an error if tag is missing" time="0.002">
+    </testcase>
+    <testcase classname="Sample Data APIs Data Modification should update an item" name="Sample Data APIs Data Modification should update an item" time="0.003">
+    </testcase>
+    <testcase classname="Sample Data APIs Data Modification should delete an item" name="Sample Data APIs Data Modification should delete an item" time="0.004">
+    </testcase>
+    <testcase classname="Sample Data APIs Semi-structured and Unstructured Data should accept a valid semi-structured event" name="Sample Data APIs Semi-structured and Unstructured Data should accept a valid semi-structured event" time="0.003">
+    </testcase>
+    <testcase classname="Sample Data APIs Semi-structured and Unstructured Data should reject an event with a missing eventName" name="Sample Data APIs Semi-structured and Unstructured Data should reject an event with a missing eventName" time="0.003">
+    </testcase>
+    <testcase classname="Sample Data APIs Semi-structured and Unstructured Data should accept a valid unstructured text log" name="Sample Data APIs Semi-structured and Unstructured Data should accept a valid unstructured text log" time="0.003">
+    </testcase>
+    <testcase classname="Sample Data APIs Semi-structured and Unstructured Data should reject an empty text log" name="Sample Data APIs Semi-structured and Unstructured Data should reject an empty text log" time="0.003">
+    </testcase>
+    <testcase classname="Sample Data APIs Semi-structured and Unstructured Data should reject a non-string log" name="Sample Data APIs Semi-structured and Unstructured Data should reject a non-string log" time="0.003">
+    </testcase>
+  </testsuite>
+  <testsuite name="User Account Management" errors="0" failures="0" skipped="0" timestamp="2026-04-23T07:55:11" time="1.947" tests="8">
+    <testcase classname="User Account Management should allow a user to create their own account" name="User Account Management should allow a user to create their own account" time="0.494">
+    </testcase>
+    <testcase classname="User Account Management should not allow a user to create an account for someone else" name="User Account Management should not allow a user to create an account for someone else" time="0.273">
+    </testcase>
+    <testcase classname="User Account Management should allow a user to read their own account" name="User Account Management should allow a user to read their own account" time="0.162">
+    </testcase>
+    <testcase classname="User Account Management should not allow a user to read another user&apos;s account" name="User Account Management should not allow a user to read another user&apos;s account" time="0.058">
+    </testcase>
+    <testcase classname="User Account Management should allow a user to update their own account" name="User Account Management should allow a user to update their own account" time="0.078">
+    </testcase>
+    <testcase classname="User Account Management should not allow a user to update another user&apos;s account" name="User Account Management should not allow a user to update another user&apos;s account" time="0.082">
+    </testcase>
+    <testcase classname="User Account Management should allow a user to delete their own account" name="User Account Management should allow a user to delete their own account" time="0.055">
+    </testcase>
+    <testcase classname="User Account Management should not allow a user to delete another user&apos;s account" name="User Account Management should not allow a user to delete another user&apos;s account" time="0.061">
+    </testcase>
+  </testsuite>
+  <testsuite name="Unstructured Log Ingestion" errors="0" failures="0" skipped="0" timestamp="2026-04-23T07:55:13" time="0.935" tests="1">
+    <testcase classname="Unstructured Log Ingestion should accept and process a plain text log payload" name="Unstructured Log Ingestion should accept and process a plain text log payload" time="0.013">
+    </testcase>
+  </testsuite>
+  <testsuite name="API Authentication &amp; Authorization" errors="0" failures="0" skipped="0" timestamp="2026-04-23T07:55:14" time="1.024" tests="6">
+    <testcase classname="API Authentication &amp; Authorization should allow a user to read their own data" name="API Authentication &amp; Authorization should allow a user to read their own data" time="0.549">
+    </testcase>
+    <testcase classname="API Authentication &amp; Authorization should prevent a user from reading other users` data" name="API Authentication &amp; Authorization should prevent a user from reading other users` data" time="0.055">
+    </testcase>
+    <testcase classname="API Authentication &amp; Authorization should allow any authenticated user to read from the data collection" name="API Authentication &amp; Authorization should allow any authenticated user to read from the data collection" time="0.061">
+    </testcase>
+    <testcase classname="API Authentication &amp; Authorization should prevent unauthenticated users from reading anything" name="API Authentication &amp; Authorization should prevent unauthenticated users from reading anything" time="0.068">
+    </testcase>
+    <testcase classname="API Authentication &amp; Authorization should allow editors to write to the data collection" name="API Authentication &amp; Authorization should allow editors to write to the data collection" time="0.068">
+    </testcase>
+    <testcase classname="API Authentication &amp; Authorization should prevent non-editors from writing to the data collection" name="API Authentication &amp; Authorization should prevent non-editors from writing to the data collection" time="0.09">
+    </testcase>
+  </testsuite>
+  <testsuite name="CSV Data Ingestion" errors="0" failures="0" skipped="0" timestamp="2026-04-23T07:55:15" time="0.759" tests="1">
+    <testcase classname="CSV Data Ingestion should accept and process a valid CSV payload" name="CSV Data Ingestion should accept and process a valid CSV payload" time="0.012">
+    </testcase>
+  </testsuite>
+  <testsuite name="UI Theme &amp; Design Consistency" errors="0" failures="0" skipped="0" timestamp="2026-04-23T07:55:15" time="1.289" tests="2">
+    <testcase classname="UI Theme &amp; Design Consistency should serve the correct color palette defined in design.md" name="UI Theme &amp; Design Consistency should serve the correct color palette defined in design.md" time="0.005">
+    </testcase>
+    <testcase classname="UI Theme &amp; Design Consistency should provide valid contrast ratios for accessible text" name="UI Theme &amp; Design Consistency should provide valid contrast ratios for accessible text" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="API Endpoint Tests" errors="0" failures="0" skipped="0" timestamp="2026-04-23T07:55:17" time="0.969" tests="6">
+    <testcase classname="API Endpoint Tests GET /api/health should return 200 OK" name="API Endpoint Tests GET /api/health should return 200 OK" time="0.014">
+    </testcase>
+    <testcase classname="API Endpoint Tests POST /api/data should handle invalid data submission with a 400 error" name="API Endpoint Tests POST /api/data should handle invalid data submission with a 400 error" time="0.007">
+    </testcase>
+    <testcase classname="API Endpoint Tests should create a new user with valid data" name="API Endpoint Tests should create a new user with valid data" time="0.003">
+    </testcase>
+    <testcase classname="API Endpoint Tests should fail to create a new user with invalid data" name="API Endpoint Tests should fail to create a new user with invalid data" time="0.003">
+    </testcase>
+    <testcase classname="API Endpoint Tests should log in a user with correct credentials" name="API Endpoint Tests should log in a user with correct credentials" time="0.003">
+    </testcase>
+    <testcase classname="API Endpoint Tests should fail to log in a user with incorrect credentials" name="API Endpoint Tests should fail to log in a user with incorrect credentials" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="Data Analysis Flows" errors="0" failures="0" skipped="0" timestamp="2026-04-23T07:55:18" time="0.34" tests="2">
+    <testcase classname="Data Analysis Flows should correctly identify outliers more than 2 std deviations from the mean" name="Data Analysis Flows should correctly identify outliers more than 2 std deviations from the mean" time="0.026">
+    </testcase>
+    <testcase classname="Data Analysis Flows should return an empty result when no data is present" name="Data Analysis Flows should return an empty result when no data is present" time="0.031">
+    </testcase>
+  </testsuite>
+  <testsuite name="Financial Data Ingestion" errors="0" failures="0" skipped="0" timestamp="2026-04-23T07:55:18" time="0.103" tests="4">
+    <testcase classname="Financial Data Ingestion should connect to Stripe and fetch data successfully" name="Financial Data Ingestion should connect to Stripe and fetch data successfully" time="0.004">
+    </testcase>
+    <testcase classname="Financial Data Ingestion should handle different data formats from Stripe" name="Financial Data Ingestion should handle different data formats from Stripe" time="0.002">
+    </testcase>
+    <testcase classname="Financial Data Ingestion should handle API errors gracefully" name="Financial Data Ingestion should handle API errors gracefully" time="0.007">
+    </testcase>
+    <testcase classname="Financial Data Ingestion should handle empty data from Stripe" name="Financial Data Ingestion should handle empty data from Stripe" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="AI Processing Phase: Core Model Verification" errors="0" failures="0" skipped="0" timestamp="2026-04-23T07:55:18" time="0.038" tests="4">
+    <testcase classname="AI Processing Phase: Core Model Verification should produce consistent and predictable outputs for the same inputs (Golden Dataset)" name="AI Processing Phase: Core Model Verification should produce consistent and predictable outputs for the same inputs (Golden Dataset)" time="0.001">
+    </testcase>
+    <testcase classname="AI Processing Phase: Core Model Verification should gracefully handle incomplete or noisy data" name="AI Processing Phase: Core Model Verification should gracefully handle incomplete or noisy data" time="0.001">
+    </testcase>
+    <testcase classname="AI Processing Phase: Core Model Verification should throw a clear error for invalid data types" name="AI Processing Phase: Core Model Verification should throw a clear error for invalid data types" time="0.006">
+    </testcase>
+    <testcase classname="AI Processing Phase: Core Model Verification should ensure demographic neutrality in financial predictions" name="AI Processing Phase: Core Model Verification should ensure demographic neutrality in financial predictions" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="AI Model &amp; Data Verification Tests" errors="0" failures="0" skipped="0" timestamp="2026-04-23T07:55:18" time="0.05" tests="6">
+    <testcase classname="AI Model &amp; Data Verification Tests Golden Dataset Testing should produce accurate financial metrics that match the golden dataset" name="AI Model &amp; Data Verification Tests Golden Dataset Testing should produce accurate financial metrics that match the golden dataset" time="0.001">
+    </testcase>
+    <testcase classname="AI Model &amp; Data Verification Tests Bias Testing should show no statistical bias across different data segments" name="AI Model &amp; Data Verification Tests Bias Testing should show no statistical bias across different data segments" time="0">
+    </testcase>
+    <testcase classname="AI Model &amp; Data Verification Tests Noisy Data Handling should gracefully handle and report on incomplete or noisy financial data" name="AI Model &amp; Data Verification Tests Noisy Data Handling should gracefully handle and report on incomplete or noisy financial data" time="0.01">
+    </testcase>
+    <testcase classname="AI Model &amp; Data Verification Tests Financial Data Ingestion Formatting should correctly parse different date formats" name="AI Model &amp; Data Verification Tests Financial Data Ingestion Formatting should correctly parse different date formats" time="0.001">
+    </testcase>
+    <testcase classname="AI Model &amp; Data Verification Tests Financial Data Ingestion Formatting should correctly interpret different currency symbols and formats" name="AI Model &amp; Data Verification Tests Financial Data Ingestion Formatting should correctly interpret different currency symbols and formats" time="0.001">
+    </testcase>
+    <testcase classname="AI Model &amp; Data Verification Tests Financial Data Ingestion Formatting should pass with valid currency and date formats" name="AI Model &amp; Data Verification Tests Financial Data Ingestion Formatting should pass with valid currency and date formats" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Data Ingestion Phase: Validation &amp; Sanitization" errors="0" failures="0" skipped="0" timestamp="2026-04-23T07:55:18" time="0.044" tests="5">
+    <testcase classname="Data Ingestion Phase: Validation &amp; Sanitization should accept a valid JSON payload" name="Data Ingestion Phase: Validation &amp; Sanitization should accept a valid JSON payload" time="0.002">
+    </testcase>
+    <testcase classname="Data Ingestion Phase: Validation &amp; Sanitization should return a 400 Bad Request if mandatory fields are missing" name="Data Ingestion Phase: Validation &amp; Sanitization should return a 400 Bad Request if mandatory fields are missing" time="0.001">
+    </testcase>
+    <testcase classname="Data Ingestion Phase: Validation &amp; Sanitization should strip malicious scripts (XSS) from input strings" name="Data Ingestion Phase: Validation &amp; Sanitization should strip malicious scripts (XSS) from input strings" time="0.002">
+    </testcase>
+    <testcase classname="Data Ingestion Phase: Validation &amp; Sanitization should successfully validate a correct color palette schema" name="Data Ingestion Phase: Validation &amp; Sanitization should successfully validate a correct color palette schema" time="0.007">
+    </testcase>
+    <testcase classname="Data Ingestion Phase: Validation &amp; Sanitization should reject a payload with an invalid hex code in the theme" name="Data Ingestion Phase: Validation &amp; Sanitization should reject a payload with an invalid hex code in the theme" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="Security Tests" errors="0" failures="0" skipped="0" timestamp="2026-04-23T07:55:18" time="0.027" tests="0">
+    <testcase classname="Security Tests should prevent SQL injection attacks" name="Security Tests should prevent SQL injection attacks" time="0">
+    </testcase>
+    <testcase classname="Security Tests should prevent cross-site scripting (XSS) attacks" name="Security Tests should prevent cross-site scripting (XSS) attacks" time="0">
+    </testcase>
+    <testcase classname="Security Tests should ensure sensitive data is encrypted at rest" name="Security Tests should ensure sensitive data is encrypted at rest" time="0">
+    </testcase>
+    <testcase classname="Security Tests should ensure sensitive data is encrypted in transit" name="Security Tests should ensure sensitive data is encrypted in transit" time="0">
+    </testcase>
+    <testcase classname="Security Tests should have hooks for automated penetration testing tools" name="Security Tests should have hooks for automated penetration testing tools" time="0">
+    </testcase>
+  </testsuite>
+</testsuites>

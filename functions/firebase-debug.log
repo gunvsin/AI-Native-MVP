@@ -3608,3 +3608,59 @@ Issues? Report them at https://github.com/firebase/firebase-tools/issues and att
     at Console._write (/nix/store/aiwv2cvrlfms5xwrsakgmnpxwh13hrmk-firebase-tools-15.0.0/lib/node_modules/firebase-tools/node_modules/winston-transport/index.js:103:17)
     at doWrite (/nix/store/aiwv2cvrlfms5xwrsakgmnpxwh13hrmk-firebase-tools-15.0.0/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:428:64)
 [error] 
+[debug] [2026-05-02T14:00:22.978Z] ----------------------------------------------------------------------
+[debug] [2026-05-02T14:00:22.981Z] Command:       /nix/store/ws50yvm6vzlzf7jzz6n7xh4szddrack1-nodejs-20.19.1/bin/node /nix/store/gm9mcvzb17vv8cla08khrg29vxn3sq4r-firebase-tools-15.1.0/lib/node_modules/firebase-tools/lib/bin/firebase.js emulators:start --only functions
+[debug] [2026-05-02T14:00:22.982Z] CLI Version:   15.1.0
+[debug] [2026-05-02T14:00:22.982Z] Platform:      linux
+[debug] [2026-05-02T14:00:22.982Z] Node Version:  v20.19.1
+[debug] [2026-05-02T14:00:22.983Z] Time:          Sat May 02 2026 14:00:22 GMT+0000 (Coordinated Universal Time)
+[debug] [2026-05-02T14:00:22.983Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-05-02T14:00:22.986Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2026-05-02T14:00:25.179Z] Checked if tokens are valid: false, expires at: 1777554691323
+[debug] [2026-05-02T14:00:25.179Z] Checked if tokens are valid: false, expires at: 1777554691323
+[debug] [2026-05-02T14:00:25.180Z] > refreshing access token with scopes: []
+[debug] [2026-05-02T14:00:25.181Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-05-02T14:00:25.181Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-05-02T14:00:25.287Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-05-02T14:00:25.288Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-05-02T14:00:25.298Z] >>> [apiv2][query] GET https://monospace-pa.googleapis.com/v1/workspaces/ai-financial-mvp-52223967 [none]
+[debug] [2026-05-02T14:00:25.550Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2026-05-02T14:00:25.551Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2026-05-02T14:00:26.617Z] <<< [apiv2][status] GET https://monospace-pa.googleapis.com/v1/workspaces/ai-financial-mvp-52223967 200
+[debug] [2026-05-02T14:00:26.617Z] <<< [apiv2][body] GET https://monospace-pa.googleapis.com/v1/workspaces/ai-financial-mvp-52223967 {"workspaceId":"ai-financial-mvp-52223967","name":"ai-financial-mvp","workspaceRedirectUrl":"firebase-ai-financial-mvp-1776510285738.cluster-fkltigo73ncaixtmokrzxhwsfc.cloudworkstations.dev","status":"WORKSPACE_STATUS_RUNNING","lastAccessDatetime":"2026-05-02T13:24:13.305960Z","workspaceTemplate":"WORKSPACE_TEMPLATE_BLANK_WEB","owner":"SELF","serviceAccountEmail":"msp-9200347869020288885@monospace-2.iam.gserviceaccount.com","enableNix":true,"ownerEmail":"gunveer.singh@gmail.com","workspaceImageUrl":"https://www.gstatic.com/monospace/250314/workspace-blank-192.png","templateArgs":"{}","templateRepoUrl":"file:///usr/local/monospace/templates/public/blank-nix","workstationAccessToken":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2Nsb3VkLmdvb2dsZS5jb20vd29ya3N0YXRpb25zIiwiYXVkIjoiZmlyZWJhc2UtYWktZmluYW5jaWFsLW12cC0xNzc2NTEwMjg1NzM4LmNsdXN0ZXItZmtsdGlnbzczbmNhaXh0bW9rcnp4aHdzZmMuY2xvdWR3b3Jrc3RhdGlvbnMuZGV2IiwiaWF0IjoxNzc3NzMwNDI2LCJleHAiOjE3Nzc4MTY4MjZ9.ZYYVeXVCnXRh1786LlwxUSxK9k1Ue6tUCcCYO_gp0pgAwsYtdbaNpMiE8gKdWgnE54d_9-VFHIE7YpKbaNmVCty1r2-5Ua0z8KP5GTyvcqtZb_YapAl0cqPeL_40qmQkis-PSsq07NYvfwe1PX3bR2U1Hvc6obSfwfvkU36ny9fc6flqgAgy5ZKcCEpGQDOWnqmSFBnWOvel9L4klG2cleEvrsm_0tVcF6TYg14GQIp3y1OqU32EBVqPT9jOKhcGJZ8VWhaABiC_Qyl88AXMR_pu0W8xU8uG5WlHdyREbBbi5eRAQHchzflTd6eUEL4urWHva9vmlYke2AMwmgIJuw","firebaseProjectId":"gen-lang-client-0217353744"}
+[error] ⬢  functions: Failed to start Functions emulator: codebase source must be specified. Must specify either 'source' or 'remoteSource' in a functions config. {"metadata":{"emulator":{"name":"functions"},"message":"Failed to start Functions emulator: codebase source must be specified. Must specify either 'source' or 'remoteSource' in a functions config."}}
+[debug] [2026-05-02T14:00:26.623Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2026-05-02T14:00:26.623Z] > authorizing via signed-in user (gunveer.singh@gmail.com)
+[warn] ⚠  Could not find config (firebase.json) so using defaults. 
+[info] i  emulators: Starting emulators: functions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions"}}
+[warn] ⚠  hub: Error when trying to check port 4400 on ::1: Error: listen EADDRNOTAVAIL: address not available ::1:4400 {"metadata":{"emulator":{"name":"hub"},"message":"Error when trying to check port 4400 on ::1: Error: listen EADDRNOTAVAIL: address not available ::1:4400"}}
+[warn] ⚠  hub: Port 4400 is available on 127.0.0.1 but not ::1. This may cause issues with some clients. {"metadata":{"emulator":{"name":"hub"},"message":"Port 4400 is available on 127.0.0.1 but not ::1. This may cause issues with some clients."}}
+[warn] ⚠  hub: If you encounter connectivity issues, consider switching to a different port or explicitly specifying "host": "<ip address>" instead of hostname in firebase.json {"metadata":{"emulator":{"name":"hub"},"message":"If you encounter connectivity issues, consider switching to a different port or explicitly specifying \"host\": \"<ip address>\" instead of hostname in firebase.json"}}
+[warn] ⚠  ui: Error when trying to check port 4000 on ::1: Error: listen EADDRNOTAVAIL: address not available ::1:4000 {"metadata":{"emulator":{"name":"ui"},"message":"Error when trying to check port 4000 on ::1: Error: listen EADDRNOTAVAIL: address not available ::1:4000"}}
+[warn] ⚠  ui: Port 4000 is available on 127.0.0.1 but not ::1. This may cause issues with some clients. {"metadata":{"emulator":{"name":"ui"},"message":"Port 4000 is available on 127.0.0.1 but not ::1. This may cause issues with some clients."}}
+[warn] ⚠  ui: If you encounter connectivity issues, consider switching to a different port or explicitly specifying "host": "<ip address>" instead of hostname in firebase.json {"metadata":{"emulator":{"name":"ui"},"message":"If you encounter connectivity issues, consider switching to a different port or explicitly specifying \"host\": \"<ip address>\" instead of hostname in firebase.json"}}
+[warn] ⚠  logging: Error when trying to check port 4500 on ::1: Error: listen EADDRNOTAVAIL: address not available ::1:4500 {"metadata":{"emulator":{"name":"logging"},"message":"Error when trying to check port 4500 on ::1: Error: listen EADDRNOTAVAIL: address not available ::1:4500"}}
+[warn] ⚠  logging: Port 4500 is available on 127.0.0.1 but not ::1. This may cause issues with some clients. {"metadata":{"emulator":{"name":"logging"},"message":"Port 4500 is available on 127.0.0.1 but not ::1. This may cause issues with some clients."}}
+[warn] ⚠  logging: If you encounter connectivity issues, consider switching to a different port or explicitly specifying "host": "<ip address>" instead of hostname in firebase.json {"metadata":{"emulator":{"name":"logging"},"message":"If you encounter connectivity issues, consider switching to a different port or explicitly specifying \"host\": \"<ip address>\" instead of hostname in firebase.json"}}
+[debug] [2026-05-02T14:00:26.634Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2026-05-02T14:00:26.640Z] Emulator locator file path: /tmp/hub-gen-lang-client-0217353744.json
+[debug] [2026-05-02T14:00:26.640Z] [hub] writing locator at /tmp/hub-gen-lang-client-0217353744.json
+[error] ⬢  functions: Failed to start Functions emulator: codebase source must be specified. Must specify either 'source' or 'remoteSource' in a functions config. {"metadata":{"emulator":{"name":"functions"},"message":"Failed to start Functions emulator: codebase source must be specified. Must specify either 'source' or 'remoteSource' in a functions config."}}
+[debug] [2026-05-02T14:00:26.675Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: connect ECONNREFUSED 127.0.0.1:40001. If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌───────────┬──────────────────────────────────┬─────────────────────┐
+│ Emulator  │ Host:Port                        │ View in Emulator UI │
+├───────────┼──────────────────────────────────┼─────────────────────┤
+│ Functions │ Failed to initialize (see above) │                     │
+└───────────┴──────────────────────────────────┴─────────────────────┘
+  Emulator Hub host: 127.0.0.1 port: 4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 

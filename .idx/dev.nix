@@ -18,7 +18,7 @@
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
     extensions = [
       # "vscodevim.vim"
-      "google.gemini-cli-vscode-ide-companion"
+      "google.gemini-cli-vscode-ide-companion",
       "dbaeumer.vscode-eslint"
     ];
     # Enable previews
@@ -32,15 +32,16 @@
       };
     };
     # Workspace lifecycle hooks
-    # workspace = {
-    #   # Runs when a workspace is first created
-    #   onCreate = {
-    #     npm-install = "npm install";
-    #   };
-    #   # Runs every time the workspace is (re)started
-    #   onStart = {
-    #     # start-dev-server = "npm run dev";
-    #   };
-    # };
+    workspace = {
+      # Runs when a workspace is first created
+      onCreate = {
+        npm-install = "npm install && npm install --prefix client";
+      };
+      # Runs every time the workspace is (re)started
+      # onStart = {
+      #   # start-dev-server = "npm run dev";
+      # };
+    };
   };
+  # Trigger reload
 }

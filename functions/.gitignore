@@ -1,0 +1,16 @@
+# Firebase Secrets - Prevents local secrets from being committed.
+.secret.local
+.env.local
+
+# Dependencies - Ignores locally installed packages.
+node_modules
+
+# Build Output - Excludes compiled TypeScript/JavaScript files.
+dist
+
+# Logs - Keeps log files out of the repository.
+*.log
+
+# Test & Coverage Reports - Excludes test results and coverage data.
+coverage
+junit.xml

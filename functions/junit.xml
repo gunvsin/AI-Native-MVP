@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="10" failures="0" time="1.541">
+  <testsuite name="POST /api/verify" errors="0" failures="0" skipped="0" timestamp="2026-04-26T05:12:44" time="0.811" tests="1">
+    <testcase classname="POST /api/verify should return 200 for valid data and save to Firestore" name="POST /api/verify should return 200 for valid data and save to Firestore" time="0.043">
+    </testcase>
+  </testsuite>
+  <testsuite name="Design Compliance Tests" errors="0" failures="0" skipped="0" timestamp="2026-04-26T05:12:45" time="0.18" tests="2">
+    <testcase classname="Design Compliance Tests /api/config/theme Endpoint should return the exact hex codes from design.md" name="Design Compliance Tests /api/config/theme Endpoint should return the exact hex codes from design.md" time="0.002">
+    </testcase>
+    <testcase classname="Design Compliance Tests /api/config/theme Endpoint should return only valid 6-digit hex color strings" name="Design Compliance Tests /api/config/theme Endpoint should return only valid 6-digit hex color strings" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="Stripe Webhooks" errors="0" failures="0" skipped="0" timestamp="2026-04-26T05:12:45" time="0.165" tests="2">
+    <testcase classname="Stripe Webhooks should process failed payment event and mark as processed" name="Stripe Webhooks should process failed payment event and mark as processed" time="0.006">
+    </testcase>
+    <testcase classname="Stripe Webhooks should not process an event that has already been processed (idempotency test)" name="Stripe Webhooks should not process an event that has already been processed (idempotency test)" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="Financial Logic Resilience" errors="0" failures="0" skipped="0" timestamp="2026-04-26T05:12:45" time="0.047" tests="5">
+    <testcase classname="Financial Logic Resilience should correctly calculate totals even if some fields are missing" name="Financial Logic Resilience should correctly calculate totals even if some fields are missing" time="0.001">
+    </testcase>
+    <testcase classname="Financial Logic Resilience should handle stringified numbers from external APIs" name="Financial Logic Resilience should handle stringified numbers from external APIs" time="0.001">
+    </testcase>
+    <testcase classname="Financial Logic Resilience should return isValid: false for empty datasets" name="Financial Logic Resilience should return isValid: false for empty datasets" time="0">
+    </testcase>
+    <testcase classname="Financial Logic Resilience should handle null and undefined values gracefully" name="Financial Logic Resilience should handle null and undefined values gracefully" time="0.001">
+    </testcase>
+    <testcase classname="Financial Logic Resilience should handle negative numbers correctly" name="Financial Logic Resilience should handle negative numbers correctly" time="0.001">
+    </testcase>
+  </testsuite>
+</testsuites>

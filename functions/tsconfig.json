@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "node16",
+    "lib": ["es2022"],
+    "skipLibCheck": true,
+    "typeRoots": ["./node_modules/@types"],
+    "moduleResolution": "node16",
+    "esModuleInterop": true,
+    "strict": true,
+    "outDir": "lib",
+    "rootDir": "src",
+    "ignoreDeprecations": "5.0",
+    "isolatedModules": true,
+    "types": ["jest"]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["src/test"]
+}
