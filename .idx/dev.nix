@@ -9,6 +9,7 @@
     # pkgs.python311
     # pkgs.python311Packages.pip
     pkgs.nodejs_22
+    pkgs.nodePackages.npm
     # pkgs.nodePackages.nodemon
   ];
   # Sets environment variables in the workspace
@@ -24,18 +25,22 @@
     previews = {
       enable = true;
       previews = {
-        # web = {
-        #   # Example: run "npm run dev" with PORT set to IDX's defined port for previews,
-        #   # and have it show up in the IDE's preview panel.
-        #   command = ["npm" "run" "dev" "--" "--port" "$PORT"];
-        #   manager = "web";
-        # };
+        web = {
+          command = ["sh" "-c" "cd client && npm run dev -- --port $PORT"];
+          manager = "web";
+        };
       };
     };
-    workspace = {
-      onCreate = {
-        npm-install = "cd client && npm install";
-      };
-    };
+    # Workspace lifecycle hooks
+    # workspace = {
+    #   # Runs when a workspace is first created
+    #   onCreate = {
+    #     npm-install = "npm install";
+    #   };
+    #   # Runs every time the workspace is (re)started
+    #   onStart = {
+    #     # start-dev-server = "npm run dev";
+    #   };
+    # };
   };
 }

@@ -1,8 +1,0 @@
-1:"$Sreact.fragment"
-2:I[36938,["/_next/static/chunks/0rx1b1exp0aeo.js","/_next/static/chunks/06d654fs3tq.s.js","/_next/static/chunks/0a-c4bvyp7-mr.js","/_next/static/chunks/0vh-1s1fyya05.js"],"default"]
-3:I[18608,["/_next/static/chunks/0rx1b1exp0aeo.js","/_next/static/chunks/06d654fs3tq.s.js","/_next/static/chunks/0a-c4bvyp7-mr.js","/_next/static/chunks/0vh-1s1fyya05.js"],"default"]
-4:I[74025,["/_next/static/chunks/0rx1b1exp0aeo.js","/_next/static/chunks/06d654fs3tq.s.js","/_next/static/chunks/0a-c4bvyp7-mr.js","/_next/static/chunks/0vh-1s1fyya05.js"],"default"]
-5:I[79101,["/_next/static/chunks/0rx1b1exp0aeo.js","/_next/static/chunks/06d654fs3tq.s.js","/_next/static/chunks/0a-c4bvyp7-mr.js"],"OutletBoundary"]
-6:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"sx":{"padding":8},"children":[["$","$L3",null,{"variant":"displayLarge","component":"h1","sx":{"mb":4},"children":"Welcome to The Sovereign Ledger."}],["$","$L4",null,{}]]}],[["$","script","script-0",{"src":"/_next/static/chunks/0vh-1s1fyya05.js","async":true}]],["$","$L5",null,{"children":["$","$6",null,{"name":"Next.MetadataOutlet","children":"$@7"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"IqxNHGgzXi8hlDHNn-btB"}
-7:null
