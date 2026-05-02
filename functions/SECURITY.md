@@ -8,9 +8,10 @@ This project endeavors to resolve all critical and high-severity vulnerabilities
 
 ## Accepted Risks
 
-The following vulnerabilities are present in the dependency tree but have been assessed as low-risk and are formally accepted.
+The dependency tree currently contains several moderate-severity vulnerabilities that cannot be resolved without introducing breaking changes to the `firebase-admin` package. 
 
-| Vulnerability | Package | Severity | Details & Justification |
-| --- | --- | --- | --- |
-| `uuid` < 14.0.0 | `uuid` | Moderate | **Reason for Acceptance:** This vulnerability (GHSA-w5hq-g745-h8pq) relates to a missing buffer bounds check. It is deeply nested within `firebase-admin` and `firebase-tools`. The likelihood of an attacker controlling the buffer input to the `uuid` function within the trusted, server-side execution environment of a Firebase Function is negligible. All critical and high-severity vulnerabilities have been patched. This moderate finding is accepted as a low-priority, non-exploitable issue in this context. |
-| `@tootallnate/once` < 3.0.1 | `@tootallnate/once` | Moderate | **Reason for Acceptance:** This vulnerability (GHSA-vpq2-c234-7xj6) relates to incorrect control flow scoping. It is a transitive dependency, deeply nested within `firebase-admin`, and is not directly called by application code. The risk of this being exploited in a server-side, trusted execution environment is extremely low. Given that all high-severity vulnerabilities are patched, this is accepted as a low-risk, non-exploitable finding. |
+After a thorough architectural review, the decision has been made to accept these risks on a temporary basis. A complete analysis of these vulnerabilities, the associated risks, and the architectural mitigation strategies in place can be found in the following document:
+
+**[./VULNERABILITY_DEBT.md](./VULNERABILITY_DEBT.md)**
+
+This document serves as the single source of truth for our vulnerability debt and our long-term resolution plan. All developers must review it to understand the environment's constraints.

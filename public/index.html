@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Idea Lab</title>
+    <style>
+        /* Design Tokens from design.md */
+        :root {
+            --primary-gold: #FFCC00;
+            --deep-charcoal: #1B1C1C;
+            --pure-white: #FCF9F8;
+            --surface-grey: #F6F3F2;
+            --verification-green: #27AE60;
+            --primary-font: 'Manrope', sans-serif;
+        }
+
+        body { 
+            font-family: var(--primary-font); 
+            background-color: var(--pure-white); 
+            color: var(--deep-charcoal); 
+            margin: 0; 
+            padding: 20px; 
+        }
+
+        h1, h2 { 
+            font-weight: 700;
+            color: var(--deep-charcoal);
+        }
+
+        #sandbox { 
+            border: 1px solid var(--surface-grey); 
+            background: var(--pure-white); 
+            padding: 20px; 
+            margin-top: 20px; 
+            border-radius: 4px; 
+        }
+
+        textarea { 
+            width: 95%; 
+            height: 150px; 
+            padding: 10px; 
+            border: 1px solid #ccc; 
+            border-radius: 4px; 
+            font-family: monospace;
+        }
+
+        button { 
+            background-color: var(--primary-gold); 
+            color: var(--deep-charcoal); 
+            padding: 10px 15px; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            margin-top: 10px;
+            font-weight: 700;
+        }
+
+        button:hover { 
+            filter: brightness(90%);
+        }
+
+        .card { 
+            margin-top: 20px; 
+            padding: 15px; 
+            border: 1px solid var(--surface-grey); 
+            border-radius: 4px; 
+            background-color: var(--surface-grey); 
+        }
+
+        .card h3 { 
+            margin-top: 0; 
+            font-weight: 700;
+            border-bottom: 2px solid var(--primary-gold);
+            padding-bottom: 5px;
+        }
+
+        .card p { 
+            margin-bottom: 5px; 
+        }
+
+        .tagline { 
+            font-style: italic; 
+            font-size: 1.1em; 
+            color: var(--deep-charcoal);
+            font-weight: 500;
+        }
+
+        .reasoning { 
+            font-size: 0.9em; 
+            color: #666; 
+        }
+    </style>
+    <!-- The Manrope font is not part of the default fonts, so I'm importing it from Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap">
+</head>
+<body>
+
+    <h1>The Ideal Web Preview: A Dynamic Development Canvas</h1>
+
+    <!-- Phase 1: The AI Idea Lab -->
+    <div id="sandbox">
+        <h2>Phase 1: AI Idea Lab (Component Sandbox)</h2>
+        <p>Perfect your prompts in AI Studio, then paste the resulting JSON here to see how it renders in the UI component.</p>
+        <textarea id="ai-output-paste" placeholder=\'\'\'Paste the JSON output from the AI Studio here. For example:
+
+{
+  "summary_tagline": "Solid month-over-month growth, but watch the churn rate.",
+  "mrr": 25000,
+  "mrr_growth": 0.12,
+  "churn_rate": 0.03,
+  "confidence_score": 0.95,
+  "reasoning": "MRR growth is strong at 12%, and the churn rate is within acceptable limits for a company of this size. The confidence score is high due to the clarity of the data from the connected Stripe account."
+}\'\'\'></textarea>
+        <button onclick="renderSandbox()">Render Component</button>
+        <div id="sandbox-render-area"></div>
+    </div>
+
+    <script>
+        // This function simulates rendering a component from raw AI output.
+        function renderSandbox() {
+            const pasteArea = document.getElementById('ai-output-paste');
+            const renderArea = document.getElementById('sandbox-render-area');
+
+            try {
+                const analysisJson = JSON.parse(pasteArea.value);
+                
+                // Basic validation
+                if (!analysisJson.summary_tagline || !analysisJson.mrr) {
+                    throw new Error("The JSON must contain at least 'summary_tagline' and 'mrr' fields.");
+                }
+
+                renderArea.innerHTML = createCardHTML(analysisJson);
+
+            } catch (e) {
+                renderArea.innerHTML = `<p style="color: red;">Error: Could not parse or render JSON. ${e.message}</p>`;
+            }
+        }
+
+        // Reusable function to create the component's HTML
+        function createCardHTML(data) {
+            const needsReview = data.confidence_score < 0.9;
+            const reviewColor = needsReview ? '#d9534f' : 'var(--verification-green)';
+
+            return \`
+                <div class="card">
+                    <h3>Financial Summary</h3>
+                    <p class="tagline">"${data.summary_tagline}"</p>
+                    <p><strong>MRR:</strong> \${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(data.mrr)}</p>
+                    <p><strong>MRR Growth:</strong> \${(data.mrr_growth * 100).toFixed(1)}%</p>
+                    <p><strong>Churn Rate:</strong> \${(data.churn_rate * 100).toFixed(1)}%</p>
+                    <p class="reasoning"><strong>AI Reasoning:</strong> ${data.reasoning}</p>
+                    <p style="color: ${reviewColor};">
+                        <strong>Confidence:</strong> ${data.confidence_score} 
+                        ${needsReview ? '(Needs Human Review)' : '(Looks Good)'}
+                    </p>
+                </div>
+            \`;
+        }
+    </script>
+
+</body>
+</html>
