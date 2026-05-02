@@ -1,6 +1,6 @@
-# To learn more about how to use Nix to configure your environment
-# see: https://developers.google.com/idx/guides/customize-idx-env
 { pkgs, ... }: {
+  # To learn more about how to use Nix to configure your environment
+  # see: https://developers.google.com/idx/guides/customize-idx-env
   # Which nixpkgs channel to use.
   channel = "stable-24.11"; # or "unstable"
   # Use https://search.nixos.org/packages to find packages
@@ -9,12 +9,10 @@
     # pkgs.python311
     # pkgs.python311Packages.pip
     pkgs.nodejs_22
-    pkgs.nodePackages.jest
     # pkgs.nodePackages.nodemon
   ];
   # Sets environment variables in the workspace
-  env = {
-  };
+  env = {};
   idx = {
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
     extensions = [
@@ -29,22 +27,14 @@
         # web = {
         #   # Example: run "npm run dev" with PORT set to IDX's defined port for previews,
         #   # and have it show up in the IDE's preview panel.
-        #   command = ["npm", "run", "dev", "--", "--port", "$PORT"];
+        #   command = ["npm" "run" "dev" "--" "--port" "$PORT"];
         #   manager = "web";
         # };
       };
     };
-    # Defines tasks that can be run from the IDE's command palette
     workspace = {
-      # Runs when the workspace is first created
       onCreate = {
-        # Example: install dependencies with npm
-        npm-install = "npm install";
-      };
-      # Runs every time the workspace is (re)started
-      onStart = {
-        # Example: start a dev server
-        # start-server = "npm run dev";
+        npm-install = "cd client && npm install";
       };
     };
   };
