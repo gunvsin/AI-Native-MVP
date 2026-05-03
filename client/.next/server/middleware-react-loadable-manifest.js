@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST='{"components/AxeAccessibility.js -> @axe-core/react":{"id":3162,"files":["static/chunks/9adad03f.00300008a25bfc20.js","static/chunks/131.f327bf93db61b13a.js"]}}';
+self.__REACT_LOADABLE_MANIFEST="{\"components/AxeAccessibility.js -> @axe-core/react\":{\"id\":\"components/AxeAccessibility.js -> @axe-core/react\",\"files\":[\"static/chunks/_app-pages-browser_node_modules_axe-core_react_dist_index_mjs.js\"]}}"

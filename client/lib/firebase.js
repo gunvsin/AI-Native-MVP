@@ -1,4 +1,4 @@
-import { initializeApp, getApps } from 'firebase/app';
+import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
 import { getFunctions, connectFunctionsEmulator } from 'firebase/functions';
 import { getAuth, connectAuthEmulator } from 'firebase/auth';
@@ -12,22 +12,15 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-let app;
-let db;
-let functions;
-let auth;
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+const db = getFirestore(app);
+const functions = getFunctions(app);
+const auth = getAuth(app);
 
-if (typeof window !== 'undefined' && !getApps().length) {
-  app = initializeApp(firebaseConfig);
-  db = getFirestore(app);
-  functions = getFunctions(app);
-  auth = getAuth(app);
-
-  if (process.env.NODE_ENV === 'development') {
+if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
     connectFirestoreEmulator(db, 'localhost', 8080);
     connectFunctionsEmulator(functions, 'localhost', 5001);
     connectAuthEmulator(auth, 'http://localhost:9099');
-  }
 }
 
 export { app, db, functions, auth };
