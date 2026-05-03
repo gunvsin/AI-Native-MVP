@@ -1,6 +1,6 @@
 import Stripe from 'stripe';
-import { app } from '../src/index'; // Corrected import path
-import * as request from 'supertest';
+import { app } from '../src/app'; // Corrected import path
+import request from 'supertest';
 
 // Mock the Stripe SDK to prevent actual API calls
 jest.mock('stripe', () => {
@@ -17,7 +17,7 @@ jest.mock('stripe', () => {
 });
 
 describe('Stripe Webhook Security', () => {
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', { apiVersion: '2024-04-10' });
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', { apiVersion: '2023-10-16' });
 
   it('should return 400 if the Stripe signature is missing', async () => {
     await request(app)

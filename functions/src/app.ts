@@ -5,6 +5,7 @@ import { sampleDataRouter } from "./sample-data-apis";
 import { createCheckoutSessionHandler } from "./checkout";
 import { getReasoningAudit } from "./feedback";
 import { syncStripeData } from "./stripe-sync";
+import { stripeWebhookHandler } from "./stripe-webhooks";
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
 
 app.use("/v1", sampleDataRouter);
 app.post("/v1/create-checkout-session", createCheckoutSessionHandler);
+app.post("/stripe-webhook", stripeWebhookHandler as any);
 
 app.get("/reasoning-audit", async (req, res) => {
   const auditData = await getReasoningAudit();

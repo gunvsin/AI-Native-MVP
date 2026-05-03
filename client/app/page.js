@@ -1,95 +1,61 @@
-
-"use client";
-
-import styles from "./page.module.css";
-import dynamic from 'next/dynamic';
-
-// Dynamically import components and disable SSR to prevent build errors
-const NetworkModeToggle = dynamic(
-  () => import('../components/NetworkModeToggle/NetworkModeToggle'),
-  { ssr: false }
-);
-
-const FinancialSummaryCard = dynamic(
-  () => import('../components/FinancialSummaryCard/FinancialSummaryCard'),
-  { ssr: false }
-);
+'use client';
+import Image from 'next/image';
+import styles from './page.module.css';
+import FinancialSummaryCard from "../components/FinancialSummaryCard/FinancialSummaryCard";
+import { useEffect, useState } from 'react';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { db } from '../lib/firebase';
 
 export default function Home() {
+  const [testData, setTestData] = useState(null);
+
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "test", "1"), (doc) => {
+      setTestData(doc.data());
+    });
+    return () => unsub();
+  }, []);
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
         <p>
-          Financial Guardian Prototype
+          Get started by editing&nbsp;
+          <code className={styles.code}>app/page.js</code>
         </p>
         <div>
           <a
-            href="https://firebase.google.com/docs/genkit"
+            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"
           >
-            By
-            Build with Google
+            By{" "}
+            <Image
+              src="/vercel.svg"
+              alt="Vercel Logo"
+              className={styles.vercelLogo}
+              width={100}
+              height={24}
+              priority
+            />
           </a>
         </div>
       </div>
 
       <div className={styles.center}>
-        <FinancialSummaryCard summaryText={'Loading summary...'} />
+        <FinancialSummaryCard/>
       </div>
 
       <div className={styles.grid}>
-        <a
-          href="https://github.com/firebase/genkit/tree/main/sample"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Genkit Samples <span>-&gt;</span>
-          </h2>
-          <p>Explore more Genkit features and integrations.</p>
-        </a>
-
-        <a
-          href="https://firebase.google.com/docs/rules"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Security Rules <span>-&gt;</span>
-          </h2>
-          <p>Learn how to secure your Firestore database.</p>
-        </a>
-
-        <a
-          href="https://www.npmjs.com/package/langchain"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            LangChain <span>-&gt;</span>
-          </h2>
-          <p>Discover the power of the LangChain framework.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=app&utm_campaign=create-next-app-readme"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+        <div className={styles.card}>
+          <h2>Firebase Test</h2>
+          {testData ? (
+            <pre>{JSON.stringify(testData, null, 2)}</pre>
+          ) : (
+            <p>Loading...</p>
+          )}
+        </div>
       </div>
-      <NetworkModeToggle />
     </main>
   );
 }

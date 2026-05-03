@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[464],{4464:function(e,t,u){u.r(t),u(7437);var s=u(2265);t.default=()=>{let[e,t]=(0,s.useState)(!1);return(0,s.useEffect)(()=>{window.isNetworkModeActive=e},[e]),null}}}]);

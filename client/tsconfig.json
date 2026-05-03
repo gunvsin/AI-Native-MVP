@@ -26,7 +26,8 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "app/__tests__/setupTests.ts"
   ],
   "exclude": [
     "node_modules"
