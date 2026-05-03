@@ -1,4 +1,7 @@
-import { handleStripeWebhook } from '../src/index';
+process.env.STRIPE_SECRET_KEY = 'sk_test_123';
+process.env.STRIPE_WEBHOOK_SECRET = 'whsec_test_123';
+
+import { stripeWebhookHandler } from '../src/index';
 import * as admin from 'firebase-admin';
 import { https } from 'firebase-functions';
 import Stripe from 'stripe';
@@ -104,7 +107,7 @@ describe('Stripe Webhook Handler', () => {
       send: jest.fn(),
     } as any;
 
-    await handleStripeWebhook(req, res);
+    await stripeWebhookHandler(req, res);
 
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.send).toHaveBeenCalledWith({
@@ -152,27 +155,4 @@ describe('Stripe Webhook Handler', () => {
       type: 'payment_intent.succeeded',
     };
 
-    const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2023-10-16' });
-    const payloadString = JSON.stringify(mockEvent, null, 2);
-    const signature = stripe.webhooks.generateTestHeaderString({
-      payload: payloadString,
-      secret: STRIPE_WEBHOOK_SECRET,
-    });
-
-    const req = {
-      headers: { 'stripe-signature': signature },
-      rawBody: Buffer.from(payloadString),
-    } as unknown as https.Request;
-
-    const res = {
-      status: jest.fn().mockReturnThis(),
-      send: jest.fn(),
-    } as any;
-
-    await handleStripeWebhook(req, res);
-
-    expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.send).toHaveBeenCalledWith(`Event ${mockEvent.id} already processed.`);
-    expect(mockAdd).not.toHaveBeenCalled();
-  });
-});
+    const stripe = new Stripe(STRIPE_SECRET_K

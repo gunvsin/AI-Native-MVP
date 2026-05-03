@@ -1,3 +1,9 @@
+import * as admin from 'firebase-admin';
+
+if (!admin.apps.length) {
+  admin.initializeApp();
+}
+
 import { onRequest } from "firebase-functions/v2/https";
 import { app } from "./app";
 import Stripe from "stripe";
@@ -6,7 +12,7 @@ import { Request, Response } from "express";
 import { stripeEventSchema, reasoningAuditSchema } from "./validation";
 import { saveReasoningAudit } from "./feedback";
 
-const stripeWebhookHandler = async (req: Request, res: Response) => {
+export const stripeWebhookHandler = async (req: Request, res: Response) => {
   const stripe = getStripe();
   let event: Stripe.Event;
 

@@ -1,5 +1,8 @@
 
 { pkgs, ... }: {
+  # Use a newer Nixpkgs channel to get access to newer packages.
+  channel = "stable-24.11";
+
   # The Nix packages available in your workspace
   # Search for packages on https://search.nixos.org/packages
   packages = [
@@ -13,8 +16,9 @@
   idx = {
     # Search for extensions on https://open-vsx.org/.
     extensions = [
-      "google.gemini-cli-vscode-ide-companion"
-      "dbaeumer.vscode-eslint"
+      "google.gemini-cli-vscode-ide-companion",
+      "dbaeumer.vscode-eslint",
+      "orta.vscode-jest"
     ];
 
     # Workspace lifecycle hooks
@@ -34,16 +38,8 @@
       previews = {
         # The web preview for the Next.js client application
         web = {
-          command = [
-            "npm"
-            "run"
-            "dev"
-            "--"
-            "--port"
-            "$PORT"
-            "--hostname"
-            "0.0.0.0"
-          ];
+          # This command starts the Next.js development server from the `client` directory
+          command = [ "npm" "run" "dev" "--" "--port" "$PORT" ];
           cwd = "client";
           manager = "web";
         };
