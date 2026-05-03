@@ -1,23 +1,33 @@
-import Stripe from 'stripe';
 import { app } from '../src/app'; // Corrected import path
 import request from 'supertest';
+import Stripe from 'stripe';
+
+process.env.STRIPE_SECRET_KEY = 'sk_test_123';
+process.env.STRIPE_WEBHOOK_SECRET = 'whsec_test_123';
+
 
 // Mock the Stripe SDK to prevent actual API calls
 jest.mock('stripe', () => {
   const originalStripe = jest.requireActual('stripe');
+  const constructEvent = jest.fn();
   return {
     __esModule: true,
     default: jest.fn().mockImplementation((...args) => {
-      return new originalStripe(...args);
+      const stripeInstance = new originalStripe(...args);
+      stripeInstance.webhooks.constructEvent = constructEvent;
+      return stripeInstance;
     }),
     webhooks: {
-      constructEvent: jest.fn(),
+      constructEvent,
     },
   };
 });
 
 describe('Stripe Webhook Security', () => {
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', { apiVersion: '2023-10-16' });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
   it('should return 400 if the Stripe signature is missing', async () => {
     await request(app)
@@ -27,6 +37,7 @@ describe('Stripe Webhook Security', () => {
   });
 
   it('should return 400 if the Stripe signature is invalid', async () => {
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', { apiVersion: '2023-10-16' });
     (stripe.webhooks.constructEvent as jest.Mock).mockImplementation(() => {
       throw new Error('Invalid signature');
     });
@@ -38,5 +49,4 @@ describe('Stripe Webhook Security', () => {
       .expect(400);
   });
 
-  // Add more tests for other security aspects, like payload inspection
 });

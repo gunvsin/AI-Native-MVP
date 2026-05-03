@@ -3,25 +3,14 @@ process.env.STRIPE_WEBHOOK_SECRET = 'whsec_test_123';
 
 import { stripeWebhookHandler } from '../src/stripe-webhooks';
 import * as admin from 'firebase-admin';
-import { https } from 'firebase-functions';
 import Stripe from 'stripe';
 
 const STRIPE_SECRET_KEY = 'sk_test_123';
 const STRIPE_WEBHOOK_SECRET = 'whsec_test_123';
 
-jest.mock('../src/config', () => ({
-  __esModule: true,
-  stripeConfig: {
-    secret_key: {
-      value: () => STRIPE_SECRET_KEY,
-    },
-    webhook_secret: {
-      value: () => STRIPE_WEBHOOK_SECRET,
-    },
-  },
-}));
-
 const mockAdd = jest.fn(() => Promise.resolve({ id: 'test_transaction_id' }));
+const mockSet = jest.fn(() => Promise.resolve());
+const mockGet = jest.fn(() => Promise.resolve({ exists: false }));
 
 // Mock Firebase Admin SDK
 jest.mock('firebase-admin', () => ({
@@ -30,8 +19,8 @@ jest.mock('firebase-admin', () => ({
   firestore: () => ({
     collection: (path: string) => ({
       doc: (docPath: string) => ({
-        get: jest.fn(() => Promise.resolve({ exists: false })),
-        set: jest.fn(() => Promise.resolve()),
+        get: mockGet,
+        set: mockSet,
       }),
       add: mockAdd,
     }),
@@ -46,22 +35,12 @@ jest.mock('firebase-functions/logger', () => ({
 }));
 
 describe('Stripe Webhook Handler', () => {
-  let docSpy: jest.SpyInstance;
-
   afterEach(() => {
     jest.clearAllMocks();
-    if (docSpy) {
-      docSpy.mockRestore();
-    }
   });
 
   it('should process a payment_intent.payment_failed event and save to Firestore', async () => {
-    const firestore = admin.firestore();
-    docSpy = jest.spyOn(firestore.collection('stripe_events'), 'doc');
-    docSpy.mockReturnValue({
-        get: jest.fn().mockResolvedValue({ exists: false }),
-        set: jest.fn().mockResolvedValue(undefined),
-    } as any);
+    mockGet.mockResolvedValue({ exists: false });
 
     const mockEvent: Stripe.Event = {
       id: 'evt_test_failed_payment',
@@ -80,10 +59,6 @@ describe('Stripe Webhook Handler', () => {
           last_payment_error: {
             code: 'card_declined',
             message: 'Your card was declined.',
-          },
-          metadata: {
-            internal_user_id: 'user_123',
-            order_id: 'order_456',
           },
         } as any,
       },
@@ -116,10 +91,7 @@ describe('Stripe Webhook Handler', () => {
       transactionId: 'test_transaction_id',
     });
 
-    const transactionsCollection = firestore.collection('transactions');
-    const eventRef = firestore.collection('stripe_events').doc(mockEvent.id);
-
-    expect(transactionsCollection.add).toHaveBeenCalledWith(
+    expect(mockAdd).toHaveBeenCalledWith(
       expect.objectContaining({
         status: 'FAILED',
         error_reason: 'card_declined',
@@ -127,7 +99,7 @@ describe('Stripe Webhook Handler', () => {
       })
     );
 
-    expect(eventRef.set).toHaveBeenCalledWith(
+    expect(mockSet).toHaveBeenCalledWith(
       expect.objectContaining({
         processed: true,
         type: 'payment_intent.payment_failed',
@@ -136,12 +108,7 @@ describe('Stripe Webhook Handler', () => {
   });
 
   it('should return 200 for a duplicate event', async () => {
-    const firestore = admin.firestore();
-    docSpy = jest.spyOn(firestore.collection('stripe_events'), 'doc');
-    docSpy.mockReturnValue({
-        get: jest.fn().mockResolvedValue({ exists: true }),
-        set: jest.fn().mockResolvedValue(undefined),
-    } as any);
+    mockGet.mockResolvedValue({ exists: true });
 
     const mockEvent: Stripe.Event = {
       id: 'evt_duplicate_event',
