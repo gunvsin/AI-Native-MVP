@@ -1,1 +1,0 @@
-self.__REACT_LOADABLE_MANIFEST='{"components/AxeAccessibility.js -> @axe-core/react":{"id":4338,"files":["static/chunks/9adad03f.fe00ffcef46f5848.js","static/chunks/338.8bba58de0f5eff33.js"]}}';

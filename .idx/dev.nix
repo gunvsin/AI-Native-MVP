@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  channel = "stable-24.05";
+  channel = "unstable";
   packages = [
     pkgs.nodejs_22
     pkgs.pre-commit

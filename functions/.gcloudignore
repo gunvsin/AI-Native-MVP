@@ -1,0 +1,15 @@
+# This file tells the gcloud CLI (used by Firebase) which files to ignore.
+
+# Don't deploy test code
+/src/test/
+
+# Don't deploy test setup files
+test-setup.ts
+
+# Standard node_modules and build output to ignore
+node_modules/
+lib/
+
+# IDE and OS files
+.DS_Store
+*.log

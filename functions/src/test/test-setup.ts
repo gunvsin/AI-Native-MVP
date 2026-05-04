@@ -4,7 +4,7 @@ import functionsTest from 'firebase-functions-test';
 // Initialize the test SDK
 const test = functionsTest();
 
-// Initialize the Admin SDK if it hasn't been already
+// Initialize the Admin SDK if it hasn's been already
 if (admin.apps.length === 0) {
   admin.initializeApp();
 }

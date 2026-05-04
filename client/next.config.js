@@ -25,6 +25,7 @@ const nextConfig = {
   turbopack: {
     root: __dirname,
   },
+  allowedDevOrigins: ['9000-firebase-ai-financial-mvp-1776510285738.cluster-fkltigo73ncaixtmokrzxhwsfc.cloudworkstations.dev'],
 };
 
 module.exports = nextConfig;
