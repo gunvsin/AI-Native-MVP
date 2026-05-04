@@ -6,6 +6,28 @@
   --surface-grey: #F6F3F2;
   --verification-green: #27AE60;
 
+  /* Extended Palette */
+  --light-gold: #FFF2B3;
+  --dark-gold: #A68A00;
+  --light-charcoal: #4A4A4A;
+  --light-grey: #EAEAEA;
+  --dark-grey: #888888;
+  --error-red: #C0392B;
+  --success-green-light: #D4EFDF;
+  --success-green-dark: #1E8449;
+
+  /* Semantic Colors */
+  --background-default: var(--pure-white);
+  --background-surface: var(--surface-grey);
+  --text-primary: var(--deep-charcoal);
+  --text-secondary: var(--light-charcoal);
+  --accent-primary: var(--primary-gold);
+  --accent-primary-light: var(--light-gold);
+  --accent-primary-dark: var(--dark-gold);
+  --status-success: var(--verification-green);
+  --status-error: var(--error-red);
+
+
   /* RGB versions for use in other properties */
   --deep-charcoal-rgb: 27, 28, 28;
   --pure-white-rgb: 252, 249, 248;
@@ -59,6 +81,12 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    /* Semantic Colors for Dark Mode */
+    --background-default: var(--deep-charcoal);
+    --background-surface: #2D2D2D; /* A slightly lighter charcoal */
+    --text-primary: var(--pure-white);
+    --text-secondary: var(--light-grey);
+    
     --foreground-rgb: var(--pure-white-rgb); /* Using design system token */
     --background-start-rgb: var(--deep-charcoal-rgb); /* Using design system token */
     --background-end-rgb: var(--deep-charcoal-rgb); /* Using design system token */

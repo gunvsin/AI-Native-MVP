@@ -1,0 +1,1 @@
+self.__REACT_LOADABLE_MANIFEST="{\"components/AxeAccessibility.js -> @axe-core/react\":{\"id\":\"components/AxeAccessibility.js -> @axe-core/react\",\"files\":[\"static/chunks/_app-pages-browser_node_modules_axe-core_react_dist_index_mjs.js\"]}}"

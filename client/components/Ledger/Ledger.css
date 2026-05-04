@@ -1,0 +1,34 @@
+.ledger-container {
+    display: grid;
+    grid-template-areas:
+      "header"
+      "main"
+      "footer";
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+    background-color: var(--background-default);
+    color: var(--text-primary);
+}
+
+.ledger-header {
+    grid-area: header;
+    padding: 1rem 2rem;
+    background-color: var(--background-surface);
+    border-bottom: 1px solid var(--light-grey);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ledger-main {
+    grid-area: main;
+    padding: 2rem;
+}
+
+.ledger-footer {
+    grid-area: footer;
+    padding: 1rem 2rem;
+    text-align: center;
+    background-color: var(--background-surface);
+    border-top: 1px solid var(--light-grey);
+}
