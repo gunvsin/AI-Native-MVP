@@ -24,9 +24,10 @@ const NetworkModeToggle = () => {
       border: '1px solid black',
       zIndex: 9999,
     }}>
-      <label>
+      <label htmlFor="network-mode-toggle">
         <input
           type="checkbox"
+          id="network-mode-toggle"
           checked={isActive}
           onChange={(e) => setIsActive(e.target.checked)}
         />
