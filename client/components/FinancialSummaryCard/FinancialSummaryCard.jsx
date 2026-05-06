@@ -1,24 +1,24 @@
-      import React from 'react';
-      import './FinancialSummaryCard.css';
-      
-      const FinancialSummaryCard = ({ summaryText = '' }) => {
-        const metrics = (summaryText || '').split('|').map(metric => metric.trim());
-        return (
-          <div className="financial-summary-card">
-            <h3>Financial Summary</h3>
-            <dl>
-             {metrics.map(metric => {
-               const [label, value] = metric.split(':');
-               return (
-                 <React.Fragment key={label}>
-                   <dt>{label}:</dt>
-                   <dd>{value.trim()}</dd>
-                 </React.Fragment>
-               );
-             })}
-           </dl>
-          </div>
-        );
-      };
-      
-      export default FinancialSummaryCard;
+import React from 'react';
+import './FinancialSummaryCard.css';
+
+const FinancialSummaryCard = ({ metrics = [] }) => {
+  return (
+    <div className="financial-summary-card">
+      <h2>Financial Summary</h2>
+      <dl>
+        {metrics.map(({ label, value }) => {
+          if (!label) return null; // Don't render if there's no label
+
+          return (
+            <React.Fragment key={label}>
+              <dt>{label}:</dt>
+              <dd>{value}</dd>
+            </React.Fragment>
+          );
+        })}
+      </dl>
+    </div>
+  );
+};
+
+export default FinancialSummaryCard;

@@ -57,7 +57,7 @@ exports.customerSubscriptionDeletedSchema = stripeEventBaseSchema.extend({
 exports.reasoningAuditSchema = zod_1.z.object({
     reasoning: zod_1.z.string(),
     userAction: zod_1.z.string(),
-    timestamp: zod_1.z.string().datetime(),
+    timestamp: zod_1.z.number(),
 });
 // A comprehensive schema that can handle different event types using a union.
 // This allows for type-safe handling of different webhook events.

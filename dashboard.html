@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Performance Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;900&family=Roboto+Mono&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --primary-gold: #FFCC00;
+      --deep-charcoal: #1B1C1C;
+      --pure-white: #FCF9F8;
+      --surface-grey: #F6F3F2;
+      --verification-green: #27AE60;
+      --radius: 4px;
+    }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background-color: var(--pure-white);
+      color: var(--deep-charcoal);
+      margin: 0;
+    }
+    
+    nav {
+        background-color: var(--deep-charcoal);
+        color: var(--pure-white);
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    nav a {
+        color: var(--pure-white);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1rem;
+    }
+
+    .main-content {
+      padding: 2rem;
+    }
+
+    h1 {
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .dashboard-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .chart-card {
+      background-color: var(--surface-grey);
+      border: 1px solid #e0e0e0;
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+
+    .chart-card h2 {
+      margin-top: 0;
+      font-weight: 700;
+      border-bottom: 2px solid var(--primary-gold);
+      padding-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+    <nav>
+        <a href="/index.html">AI Idea Lab</a>
+        <a href="/review.html">Transaction Review</a>
+        <a href="/dashboard.html">Performance Dashboard</a>
+    </nav>
+
+  <div class="main-content">
+    <h1>AI Performance Dashboard</h1>
+
+    <div class="dashboard-container">
+      <div class="chart-card">
+        <h2>Daily Corrections</h2>
+        <canvas id="corrections-chart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h2>Confidence Distribution of Corrections</h2>
+        <canvas id="confidence-chart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="/__/firebase/8.10.1/firebase-app.js"></script>
+  <script src="/__/firebase/8.10.1/firebase-firestore.js"></script>
+  <script src="/__/firebase/init.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const db = firebase.firestore();
+
+    db.collection("ai_performance_metrics")
+      .orderBy("date", "desc")
+      .limit(30) // Get last 30 days of metrics
+      .get()
+      .then(snapshot => {
+        if (snapshot.empty) {
+            console.log("No performance metrics found.");
+            return;
+        }
+
+        const metrics = snapshot.docs.map(doc => doc.data()).reverse(); // Reverse for chronological order
+
+        const labels = metrics.map(m => m.date);
+        const correctionsData = metrics.map(m => m.dailyCorrections);
+
+        // --- Corrections Over Time Chart --- //
+        const correctionsCtx = document.getElementById('corrections-chart').getContext('2d');
+        new Chart(correctionsCtx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Daily AI Corrections',
+                    data: correctionsData,
+                    borderColor: '#FFCC00',
+                    backgroundColor: 'rgba(255, 204, 0, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Number of Corrections' }
+                    }
+                }
+            }
+        });
+
+        // --- Confidence Distribution Chart (for the most recent day) --- //
+        const latestMetrics = metrics[metrics.length - 1];
+        const confidenceData = latestMetrics.confidenceDistributionOfCorrections;
+        
+        const confidenceCtx = document.getElementById('confidence-chart').getContext('2d');
+        new Chart(confidenceCtx, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(confidenceData),
+                datasets: [{
+                    label: `Confidence Distribution of Corrections for ${latestMetrics.date}` ,
+                    data: Object.values(confidenceData),
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(255, 159, 64, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                    ]
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Number of Corrections' }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: `Confidence Distribution for ${latestMetrics.date}`
+                    }
+                }
+            }
+        });
+
+      })
+      .catch(error => {
+        console.error("Error fetching performance metrics:", error);
+      });
+});
+  </script>
+
+</body>
+</html>

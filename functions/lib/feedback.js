@@ -41,7 +41,7 @@ const logger = __importStar(require("firebase-functions/logger"));
  * Feedback Loop: Logs discrepancies between AI predictions and User corrections.
  * This data will be used for Phase V fine-tuning and prompt optimization.
  */
-exports.logCorrection = (0, firestore_1.onDocumentUpdated)("transactions/{docId}", async (event) => {
+exports.logCorrection = (0, firestore_1.onDocumentUpdated)({ region: "australia-southeast1", document: "transactions/{docId}" }, async (event) => {
     const before = event.data?.before.data();
     const after = event.data?.after.data();
     // Guard against undefined data or missing analysis objects
@@ -64,10 +64,11 @@ exports.logCorrection = (0, firestore_1.onDocumentUpdated)("transactions/{docId}
                 original_ai_prediction: before.analysis.category,
                 user_correction: after.analysis.category,
                 confidence_at_time: before.analysis.confidence_score,
-                // --- FIX APPLIED ---
-                // The AI's reasoning is now logged to enable the "Reasoning Audit".
                 reasoning: before.analysis.reasoning || "N/A",
                 loggedAt: init_1.admin.firestore.FieldValue.serverTimestamp(),
+                // --- ENHANCED AUDIT FIELDS ---
+                corrected_by_user_id: after.analysis.reviewed_by_user_id || "UNKNOWN",
+                correction_reason: after.analysis.correction_reason || "N/A",
             };
             // Log the correction to a dedicated collection for analysis.
             await init_1.admin.firestore().collection("ai_feedback_loop").add(correctionLog);

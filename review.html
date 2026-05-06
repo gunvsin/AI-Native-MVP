@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;900&family=Roboto+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-gold: #FFCC00;
+      --deep-charcoal: #1B1C1C;
+      --pure-white: #FCF9F8;
+      --surface-grey: #F6F3F2;
+      --verification-green: #27AE60;
+      --radius: 4px;
+    }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background-color: var(--pure-white);
+      color: var(--deep-charcoal);
+      margin: 0;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .review-container {
+      max-width: 800px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .review-card {
+      background-color: var(--surface-grey);
+      border: 1px solid #e0e0e0;
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .transaction-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .transaction-header .description {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+    
+    .transaction-header .amount {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .ai-suggestion {
+      background-color: var(--pure-white);
+      border-radius: var(--radius);
+      padding: 1rem;
+    }
+    
+    .ai-suggestion p {
+        margin: 0 0 0.5rem 0;
+    }
+
+    .ai-suggestion .reasoning {
+        font-style: italic;
+        color: #555;
+    }
+
+    .ai-category {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    
+    .confidence {
+      font-size: 0.9rem;
+      color: #333;
+    }
+    
+    .actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    button {
+      font-family: 'Manrope', sans-serif;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    
+    .approve-btn {
+        background-color: var(--verification-green);
+        color: var(--pure-white);
+    }
+
+    .change-category-btn {
+        background-color: var(--primary-gold);
+        color: var(--deep-charcoal);
+    }
+    
+    .correction-form {
+        display: none; /* Hidden by default */
+        padding: 1rem;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .correction-form select, .correction-form input {
+        width: 100%;
+        padding: 0.5rem;
+        margin-top: 0.5rem;
+        border-radius: var(--radius);
+        border: 1px solid #ccc;
+    }
+
+    .correction-form button {
+        margin-top: 1rem;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>Transaction Review Queue</h1>
+
+  <div class="review-container">
+    <!-- Example Card 1: High Confidence -->
+    <div class="review-card">
+      <div class="transaction-header">
+        <span class="description">Starbucks</span>
+        <span class="amount">$5.75</span>
+      </div>
+      <div class="ai-suggestion">
+        <p>AI Suggestion: <span class="ai-category">Food & Dining</span></p>
+        <p class="confidence">Confidence: 95%</p>
+        <p class="reasoning">"The description 'Starbucks' is highly indicative of a coffee shop, which falls under the Food & Dining category."</p>
+      </div>
+      <div class="actions">
+        <button class="approve-btn">Approve</button>
+        <button class="change-category-btn">Change Category</button>
+      </div>
+      <div class="correction-form">
+        <label for="category-select-1">Correct Category:</label>
+        <select id="category-select-1">
+          <option>Choose...</option>
+          <option>Food & Dining</option>
+          <option>Transportation</option>
+          <option>Shopping</option>
+          <option>Utilities</option>
+        </select>
+        <label for="reason-input-1">Reason (optional):</label>
+        <input id="reason-input-1" type="text" placeholder="e.g., This was a business meeting">
+        <button class="approve-btn">Save Correction</button>
+      </div>
+    </div>
+
+    <!-- Example Card 2: Low Confidence -->
+    <div class="review-card">
+        <div class="transaction-header">
+          <span class="description">VENMO-PAYMENT-1A2B</span>
+          <span class="amount">$50.00</span>
+        </div>
+        <div class="ai-suggestion">
+          <p>AI Suggestion: <span class="ai-category">Shopping</span></p>
+          <p class="confidence">Confidence: 45%</p>
+          <p class="reasoning">"The description contains 'PAYMENT', suggesting a purchase. However, 'VENMO' indicates a peer-to-peer transfer, which has low classification certainty."</p>
+        </div>
+        <div class="actions">
+          <button class="approve-btn">Approve</button>
+          <button class="change-category-btn">Change Category</button>
+        </div>
+        <div class="correction-form">
+          <label for="category-select-2">Correct Category:</label>
+          <select id="category-select-2">
+            <option>Choose...</option>
+            <option>Food & Dining</option>
+            <option>Transportation</option>
+            <option>Shopping</option>
+            <option>Utilities</option>
+          </select>
+          <label for="reason-input-2">Reason (optional):</label>
+          <input id="reason-input-2" type="text" placeholder="e.g., This was a business meeting">
+          <button class="approve-btn">Save Correction</button>
+        </div>
+      </div>
+  </div>
+
+  <script>
+    // JavaScript to handle the 'Change Category' button clicks
+    document.querySelectorAll('.change-category-btn').forEach(button => {
+        button.addEventListener('click', (event) => {
+            const card = event.target.closest('.review-card');
+            const form = card.querySelector('.correction-form');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        });
+    });
+
+    // NOTE: This is a placeholder for the full implementation.
+    // A complete implementation would:
+    // 1. Fetch transactions where `needs_review` is true from Firestore.
+    // 2. Dynamically render a 'review-card' for each transaction.
+    // 3. On 'Approve', update the Firestore document: set `needs_review` to false.
+    // 4. On 'Save Correction', update the Firestore document: change the category, set `needs_review` to false, and add the `reviewed_by_user_id` and `correction_reason` fields.
+  </script>
+
+</body>
+</html>

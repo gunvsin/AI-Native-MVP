@@ -3,15 +3,13 @@ import FinancialSummaryCard from '../FinancialSummaryCard/FinancialSummaryCard';
 
 const FinancialMetrics = () => {
   // In a real application, this data would be fetched from an API
-  const metrics = {
-    mrr: '50,000',
-    ltv: '1,200',
-    churn: '2.5%',
-  };
+  const metrics = [
+    { label: 'MRR', value: '$50,000' },
+    { label: 'LTV', value: '$1,200' },
+    { label: 'Churn', value: '2.5%' },
+  ];
 
-  const summaryText = `MRR: $${metrics.mrr} | LTV: $${metrics.ltv} | Churn: ${metrics.churn}`;
-
-  return <FinancialSummaryCard summaryText={summaryText} />;
+  return <FinancialSummaryCard metrics={metrics} />;
 };
 
 export default FinancialMetrics;

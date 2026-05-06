@@ -8,14 +8,13 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const sample_data_apis_1 = require("./sample-data-apis");
 const checkout_1 = require("./checkout");
-const feedback_1 = require("./feedback");
 const stripe_sync_1 = require("./stripe-sync");
 const stripe_webhooks_1 = require("./stripe-webhooks");
 const app = (0, express_1.default)();
 exports.app = app;
 app.use((0, cors_1.default)({ origin: true }));
 app.use((req, res, next) => {
-    if (req.path === "/stripe-webhook") {
+    if (req.path.includes("/stripe-webhook")) {
         express_1.default.raw({ type: "application/json" })(req, res, (err) => {
             if (err) {
                 return res.status(400).send("Invalid request body");
@@ -30,10 +29,6 @@ app.use((req, res, next) => {
 app.use("/v1", sample_data_apis_1.sampleDataRouter);
 app.post("/v1/create-checkout-session", checkout_1.createCheckoutSessionHandler);
 app.post("/stripe-webhook", stripe_webhooks_1.stripeWebhookHandler);
-app.get("/reasoning-audit", async (req, res) => {
-    const auditData = await (0, feedback_1.getReasoningAudit)();
-    res.json(auditData);
-});
 app.post("/stripe-sync", async (req, res) => {
     try {
         await (0, stripe_sync_1.syncStripeData)(req.body.userId);

@@ -1,12 +1,2 @@
-
-# Firebase
-.firebase
-
-# IDE configs
-.idx
-
-# Dependencies
+.env
 node_modules
-
-# Environment variables
-functions/.env

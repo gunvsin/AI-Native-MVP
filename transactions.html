@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Transactions</title>
+<style>
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+</style>
+</head>
+<body>
+
+<h2>Transactions</h2>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Amount</th>
+    <th>Created</th>
+    <th>Currency</th>
+    <th>Description</th>
+    <th>Type</th>
+    <th>Fee</th>
+    <th>Status</th>
+  </tr>
+  <script>
+    const data = [{"id":"txn_1TTNMFD3DXEt5CnpLze5dhEe","amount":"-182.49","created":{"value":"2026-05-04T14:20:26.000Z"},"currency":"aud","description":"STRIPE PAYOUT","type":"payout","fee":"0","status":"available"},{"id":"txn_1TT0snD3DXEt5Cnpldz4TAoq","amount":"-52.26","created":{"value":"2026-05-03T14:20:32.000Z"},"currency":"aud","description":"STRIPE PAYOUT","type":"payout","fee":"0","status":"available"},{"id":"txn_3TRVYQD3DXEt5Cnp2PiZTvbj","amount":"41.96","created":{"value":"2026-04-29T10:41:19.000Z"},"currency":"aud","description":null,"type":"charge","fee":"2.61","status":"pending"},{"id":"txn_3TRBr3D3DXEt5Cnp00yQTZd2","amount":"27.91","created":{"value":"2026-04-28T13:39:14.000Z"},"currency":"aud","description":"(created by Stripe CLI)","type":"charge","fee":"1.84","status":"available"},{"id":"txn_3TRBkrD3DXEt5Cnp1Xy5G9M7","amount":"27.91","created":{"value":"2026-04-28T13:32:49.000Z"},"currency":"aud","description":"(created by Stripe CLI)","type":"charge","fee":"1.84","status":"available"},{"id":"txn_3TRBgqD3DXEt5Cnp20x4oTdx","amount":"27.91","created":{"value":"2026-04-28T13:28:40.000Z"},"currency":"aud","description":"(created by Stripe CLI)","type":"charge","fee":"1.84","status":"available"},{"id":"txn_3TRBehD3DXEt5Cnp1kYRUbTz","amount":"27.91","created":{"value":"2026-04-28T13:26:28.000Z"},"currency":"aud","description":"(created by Stripe CLI)","type":"charge","fee":"1.84","status":"available"},{"id":"txn_3TRBQYD3DXEt5Cnp1Vds0uD5","amount":"27.91","created":{"value":"2026-04-28T13:11:50.000Z"},"currency":"aud","description":"(created by Stripe CLI)","type":"charge","fee":"1.84","status":"available"},{"id":"txn_3TRBOuD3DXEt5Cnp04NS4T0j","amount":"27.91","created":{"value":"2026-04-28T13:10:08.000Z"},"currency":"aud","description":"(created by Stripe CLI)","type":"charge","fee":"1.84","status":"available"},{"id":"txn_3TRBNrD3DXEt5Cnp23lWGr6r","amount":"27.91","created":{"value":"2026-04-28T13:09:03.000Z"},"currency":"aud","description":"(created by Stripe CLI)","type":"charge","fee":"1.84","status":"available"},{"id":"txn_3TQRAwD3DXEt5Cnp0FzPtNhP","amount":"27.97","created":{"value":"2026-04-26T11:48:39.000Z"},"currency":"aud","description":"(created by Stripe CLI)","type":"charge","fee":"1.84","status":"available"},{"id":"txn_3TQR6VD3DXEt5Cnp1AXbjjD3","amount":"27.97","created":{"value":"2026-04-26T11:44:03.000Z"},"currency":"aud","description":"(created by Stripe CLI)","type":"charge","fee":"1.84","status":"available"},{"id":"txn_1TPB73D3DXEt5CnpjXMfkpjF","amount":"-4.05","created":{"value":"2026-04-23T00:27:25.000Z"},"currency":"aud","description":"STRIPE PAYOUT","type":"payout","fee":"0","status":"available"},{"id":"txn_3TMjToD3DXEt5Cnp1U16oWsq","amount":"1.39","created":{"value":"2026-04-16T06:32:48.000Z"},"currency":"aud","description":"(created by Stripe CLI)","type":"charge","fee":"0.39","status":"available"},{"id":"txn_3TMitND3DXEt5Cnp12lC8pEv","amount":"1.39","created":{"value":"2026-04-16T05:55:09.000Z"},"currency":"aud","description":"(created by Stripe CLI)","type":"charge","fee":"0.39","status":"available"},{"id":"txn_3TMiKSD3DXEt5Cnp2rzmNGEn","amount":"1.39","created":{"value":"2026-04-16T05:19:05.000Z"},"currency":"aud","description":"(created by Stripe CLI)","type":"charge","fee":"0.39","status":"available"},{"id":"txn_3TMiKAD3DXEt5Cnp2JTxHiy3","amount":"-1.39","created":{"value":"2026-04-16T05:18:48.000Z"},"currency":"aud","description":"REFUND FOR CHARGE ((created by Stripe CLI))","type":"refund","fee":"0","status":"available"},{"id":"txn_3TMiKAD3DXEt5Cnp2afXzYYs","amount":"1.39","created":{"value":"2026-04-16T05:18:46.000Z"},"currency":"aud","description":"(created by Stripe CLI)","type":"charge","fee":"0.39","status":"available"},{"id":"txn_3TMhaZD3DXEt5Cnp2jr4zau7","amount":"1.39","created":{"value":"2026-04-16T04:31:39.000Z"},"currency":"aud","description":"(created by Stripe CLI)","type":"charge","fee":"0.39","status":"available"},{"id":"txn_3TMhNgD3DXEt5Cnp2TaWFXIi","amount":"1.39","created":{"value":"2026-04-16T04:18:20.000Z"},"currency":"aud","description":"(created by Stripe CLI)","type":"charge","fee":"0.39","status":"available"},{"id":"txn_3TMhNRD3DXEt5Cnp0MQpINZu","amount":"-1.39","created":{"value":"2026-04-16T04:18:07.000Z"},"currency":"aud","description":"REFUND FOR CHARGE ((created by Stripe CLI))","type":"refund","fee":"0","status":"available"},{"id":"txn_3TMhNRD3DXEt5Cnp08qvx8OD","amount":"1.39","created":{"value":"2026-04-16T04:18:05.000Z"},"currency":"aud","description":"(created by Stripe CLI)","type":"charge","fee":"0.39","status":"available"},{"id":"txn_3TMgfID3DXEt5Cnp0JNFcJWd","amount":"-1.39","created":{"value":"2026-04-16T03:32:30.000Z"},"currency":"aud","description":"REFUND FOR CHARGE ((created by Stripe CLI))","type":"refund","fee":"0","status":"available"},{"id":"txn_3TMgfID3DXEt5Cnp0q8UBV4V","amount":"1.39","created":{"value":"2026-04-16T03:32:29.000Z"},"currency":"aud","description":"(created by Stripe CLI)","type":"charge","fee":"0.39","status":"available"},{"id":"txn_3TMgenD3DXEt5Cnp1AL6qgtC","amount":"1.39","created":{"value":"2026-04-16T03:31:58.000Z"},"currency":"aud","description":"(created by Stripe CLI)","type":"charge","fee":"0.39","status":"available"},{"id":"txn_3TMgWiD3DXEt5Cnp0TwoSngq","amount":"-1.39","created":{"value":"2026-04-16T03:23:38.000Z"},"currency":"aud","description":"REFUND FOR CHARGE ((created by Stripe CLI))","type":"refund","fee":"0","status":"available"},{"id":"txn_3TMgWiD3DXEt5Cnp0PiBaHrb","amount":"1.39","created":{"value":"2026-04-16T03:23:37.000Z"},"currency":"aud","description":"(created by Stripe CLI)","type":"charge","fee":"0.39","status":"available"},{"id":"txn_3TMfZ0D3DXEt5Cnp2yOZlSSV","amount":"-1.39","created":{"value":"2026-04-16T02:21:56.000Z"},"currency":"aud","description":"REFUND FOR CHARGE ((created by Stripe CLI))","type":"refund","fee":"0","status":"available"},{"id":"txn_3TMfZ0D3DXEt5Cnp2akC7JYN","amount":"1.39","created":{"value":"2026-04-16T02:21:55.000Z"},"currency":"aud","description":"(created by Stripe CLI)","type":"charge","fee":"0.39","status":"available"}];
+    const table = document.querySelector("table");
+    data.forEach(row => {
+      const tr = table.insertRow();
+      tr.insertCell().innerText = row.id;
+      tr.insertCell().innerText = row.amount;
+      tr.insertCell().innerText = new Date(row.created.value).toLocaleString();
+      tr.insertCell().innerText = row.currency;
+      tr.insertCell().innerText = row.description;
+      tr.insertCell().innerText = row.type;
+      tr.insertCell().innerText = row.fee;
+      tr.insertCell().innerText = row.status;
+    });
+  </script>
+</table>
+
+</body>
+</html>

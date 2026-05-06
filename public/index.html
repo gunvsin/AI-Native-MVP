@@ -20,7 +20,27 @@
             background-color: var(--pure-white); 
             color: var(--deep-charcoal); 
             margin: 0; 
-            padding: 20px; 
+            padding: 0; 
+        }
+        
+        nav {
+            background-color: var(--deep-charcoal);
+            color: var(--pure-white);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--pure-white);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .main-content {
+            padding: 20px;
         }
 
         h1, h2 { 
@@ -95,25 +115,22 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap">
 </head>
 <body>
+    <nav>
+        <a href="/index.html">AI Idea Lab</a>
+        <a href="/review.html">Transaction Review Queue</a>
+    </nav>
 
-    <h1>The Ideal Web Preview: A Dynamic Development Canvas</h1>
+    <div class="main-content">
+        <h1>The Ideal Web Preview: A Dynamic Development Canvas</h1>
 
-    <!-- Phase 1: The AI Idea Lab -->
-    <div id="sandbox">
-        <h2>Phase 1: AI Idea Lab (Component Sandbox)</h2>
-        <p>Perfect your prompts in AI Studio, then paste the resulting JSON here to see how it renders in the UI component.</p>
-        <textarea id="ai-output-paste" placeholder=\'\'\'Paste the JSON output from the AI Studio here. For example:
-
-{
-  "summary_tagline": "Solid month-over-month growth, but watch the churn rate.",
-  "mrr": 25000,
-  "mrr_growth": 0.12,
-  "churn_rate": 0.03,
-  "confidence_score": 0.95,
-  "reasoning": "MRR growth is strong at 12%, and the churn rate is within acceptable limits for a company of this size. The confidence score is high due to the clarity of the data from the connected Stripe account."
-}\'\'\'></textarea>
-        <button onclick="renderSandbox()">Render Component</button>
-        <div id="sandbox-render-area"></div>
+        <!-- Phase 1: The AI Idea Lab -->
+        <div id="sandbox">
+            <h2>Phase 1: AI Idea Lab (Component Sandbox)</h2>
+            <p>Perfect your prompts in AI Studio, then paste the resulting JSON here to see how it renders in the UI component.</p>
+            <textarea id="ai-output-paste" placeholder="''Paste the JSON output from the AI Studio here. For example:\n\n{\n  \"summary_tagline\": \"Solid month-over-month growth, but watch the churn rate.\",\n  \"mrr\": 25000,\n  \"mrr_growth\": 0.12,\n  \"churn_rate\": 0.03,\n  \"confidence_score\": 0.95,\n  \"reasoning\": \"MRR growth is strong at 12%, and the churn rate is within acceptable limits for a company of this size. The confidence score is high due to the clarity of the data from the connected Stripe account.\"\n}''"></textarea>
+            <button onclick="renderSandbox()">Render Component</button>
+            <div id="sandbox-render-area"></div>
+        </div>
     </div>
 
     <script>
@@ -142,7 +159,7 @@
             const needsReview = data.confidence_score < 0.9;
             const reviewColor = needsReview ? '#d9534f' : 'var(--verification-green)';
 
-            return \`
+            return `
                 <div class="card">
                     <h3>Financial Summary</h3>
                     <p class="tagline">"${data.summary_tagline}"</p>
@@ -155,7 +172,7 @@
                         ${needsReview ? '(Needs Human Review)' : '(Looks Good)'}
                     </p>
                 </div>
-            \`;
+            `;
         }
     </script>
 

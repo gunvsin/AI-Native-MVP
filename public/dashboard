@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Performance Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;900&family=Roboto+Mono&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --primary-gold: #FFCC00;
+      --deep-charcoal: #1B1C1C;
+      --pure-white: #FCF9F8;
+      --surface-grey: #F6F3F2;
+      --verification-green: #27AE60;
+      --radius: 4px;
+    }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background-color: var(--pure-white);
+      color: var(--deep-charcoal);
+      margin: 0;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    #dashboard-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .chart-card {
+      background-color: #fff;
+      border: 1px solid var(--surface-grey);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+  </style>
+</head>
+<body>
+  <h1>AI Performance Dashboard</h1>
+  <div id="dashboard-container">
+    <div class="chart-card">
+      <canvas id="corrections-chart"></canvas>
+    </div>
+    <div class="chart-card">
+      <canvas id="confidence-chart"></canvas>
+    </div>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="/__/firebase/8.10.1/firebase-app.js"></script>
+  <script src="/__/firebase/8.10.1/firebase-firestore.js"></script>
+  <script src="/__/firebase/init.js"></script>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

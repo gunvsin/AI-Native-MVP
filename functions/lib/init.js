@@ -40,8 +40,6 @@ exports.admin = exports.getStripe = void 0;
 const admin = __importStar(require("firebase-admin"));
 exports.admin = admin;
 const stripe_1 = __importDefault(require("stripe"));
-const dotenv = __importStar(require("dotenv"));
-dotenv.config();
 // Initialize Firebase Admin SDK only once
 if (!admin.apps.length) {
     admin.initializeApp();
@@ -52,9 +50,6 @@ let stripe = null;
  * @returns An instance of the Stripe SDK.
  */
 const getStripe = () => {
-    if (!process.env.STRIPE_SECRET_KEY) {
-        throw new Error("Stripe secret key is not configured.");
-    }
     if (stripe) {
         return stripe;
     }

@@ -1,114 +1,57 @@
 
-import * as admin from 'firebase-admin';
-import Stripe from "stripe";
-import { getStripe } from "./init";
 import { Request, Response } from "express";
-import { stripeEventSchema, reasoningAuditSchema } from "./validation";
-import { saveReasoningAudit } from "./feedback";
-
-if (!admin.apps.length) {
-  admin.initializeApp();
-}
+import Stripe from "stripe";
+import { db } from "./db";
 
 export const stripeWebhookHandler = async (req: Request, res: Response) => {
-  const stripe = getStripe();
-  const firestore = admin.firestore();
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', { apiVersion: '2023-10-16' });
+  const sig = req.headers["stripe-signature"];
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+  if (!sig) {
+    return res.status(400).send("Stripe signature is missing.");
+  }
+
+  if (!webhookSecret) {
+    return res.status(400).send("Webhook secret is not configured.");
+  }
+
   let event: Stripe.Event;
-
-  if (!process.env.STRIPE_WEBHOOK_SECRET) {
-    console.error("Stripe webhook secret is not configured.");
-    res.status(500).send("Internal server error: Webhook secret not configured.");
-    return;
-  }
-
-  const signature = req.headers["stripe-signature"] as string;
-
-  if (!signature) {
-    res.status(400).send("Webhook signature is missing.");
-    return;
-  }
+  const body = (req as any).rawBody || req.body;
 
   try {
-    event = stripe.webhooks.constructEvent(
-      (req as any).rawBody,
-      signature,
-      process.env.STRIPE_WEBHOOK_SECRET
-    );
+    event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
   } catch (err: any) {
-    console.log(`❌ Error verifying webhook signature: ${err.message}`);
-    res.status(400).send("Webhook Error: Signature verification failed.");
-    return;
+    return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  const validationResult = stripeEventSchema.safeParse(event);
+  const eventId = event.id;
+  const doc = await db.collection('stripe_events').doc(eventId).get();
 
-  if (!validationResult.success) {
-    console.error("Zod validation failed:", validationResult.error);
-    res.status(400).send("Invalid webhook payload.");
-    return;
-  }
-
-  const validatedEvent = validationResult.data;
-  const eventRef = firestore.collection('stripe_events').doc(validatedEvent.id);
-
-  const doc = await eventRef.get();
   if (doc.exists) {
-    console.log("Duplicate event received, ignoring.");
-    res.status(200).json({ status: "duplicate" });
-    return;
+    return res.status(200).json({ status: "duplicate" });
   }
 
-  switch (validatedEvent.type) {
-    case 'payment_intent.succeeded': {
-      const pi = validatedEvent.data.object as unknown as Stripe.PaymentIntent;
-      const transactionsCollection = firestore.collection('transactions');
-      const { id } = await transactionsCollection.add({
-        status: 'COMPLETED',
-        stripe_payment_id: pi.id,
-      });
-      await eventRef.set({ processed: true, type: validatedEvent.type });
-      res.status(200).json({ status: 'success', event_type: validatedEvent.type, transactionId: id });
-      return;
-    }
-
-    case 'payment_intent.payment_failed': {
-      const pi = validatedEvent.data.object as unknown as Stripe.PaymentIntent;
-      const transactionsCollection = firestore.collection('transactions');
-      const { id } = await transactionsCollection.add({
+  switch (event.type) {
+    case 'payment_intent.payment_failed':
+      const paymentIntent = event.data.object as Stripe.PaymentIntent;
+      const newTransaction = await db.collection('transactions').add({
         status: 'FAILED',
-        error_reason: pi.last_payment_error?.code,
-        stripe_payment_id: pi.id,
+        error_reason: paymentIntent.last_payment_error?.code,
+        stripe_payment_id: paymentIntent.id
       });
-      await eventRef.set({ processed: true, type: validatedEvent.type });
-      res.status(200).json({ status: 'success', event_type: validatedEvent.type, transactionId: id });
-      return;
-    }
-
-    case "checkout.session.completed":
-      const session = validatedEvent.data.object as unknown as Stripe.Checkout.Session;
-      console.log("Checkout session completed:", session.id);
-
-      const reasoningAuditString = session?.metadata?.reasoning_audit;
-      if (reasoningAuditString && typeof reasoningAuditString === 'string') {
-        try {
-            const audit = reasoningAuditSchema.safeParse(JSON.parse(reasoningAuditString));
-            if (audit.success) {
-              console.log("Reasoning audit is valid:", audit.data);
-              await saveReasoningAudit(audit.data);
-            } else {
-              console.error("Invalid reasoning audit:", audit.error);
-            }
-        } catch(e) {
-            console.error('Error parsing reasoning_audit', e);
-        }
-      }
-      break;
-
-    case "customer.subscription.deleted":
-      break;
-
+      await db.collection('stripe_events').doc(eventId).set({
+        processed: true,
+        type: event.type
+      });
+      return res.json({
+          event_type: event.type,
+          status: 'success',
+          transactionId: newTransaction.id
+      });
     default:
-      console.log(`Unhandled event type ${validatedEvent.type}`);
+      // Unhandled event type
+      break;
   }
 
   res.json({ received: true });

@@ -58,7 +58,7 @@ export const customerSubscriptionDeletedSchema = stripeEventBaseSchema.extend({
 export const reasoningAuditSchema = z.object({
   reasoning: z.string(),
   userAction: z.string(),
-  timestamp: z.string().datetime(),
+  timestamp: z.number(),
 });
 
 // A comprehensive schema that can handle different event types using a union.

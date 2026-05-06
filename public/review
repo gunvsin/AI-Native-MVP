@@ -1,0 +1,59 @@
+<!-- Cache-busting comment -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;900&family=Roboto+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-gold: #FFCC00;
+      --deep-charcoal: #1B1C1C;
+      --pure-white: #FCF9F8;
+      --surface-grey: #F6F3F2;
+      --verification-green: #27AE60;
+      --radius: 4px;
+    }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background-color: var(--pure-white);
+      color: var(--deep-charcoal);
+      margin: 0;
+      padding: 2rem;
+    }
+
+    #review-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .transaction-card {
+      background-color: #fff;
+      border: 1px solid var(--surface-grey);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    /* ... other styles ... */
+  </style>
+</head>
+<body>
+  <h1>Transaction Review</h1>
+  <div id="review-container">
+    <!-- Transactions will be loaded here by review.js -->
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="/__/firebase/8.10.1/firebase-app.js"></script>
+  <script src="/__/firebase/8.10.1/firebase-firestore.js"></script>
+  <script src="/__/firebase/init.js"></script>
+
+  <script src="review.js"></script>
+</body>
+</html>

@@ -1,4 +1,3 @@
-
 # Research Plan: Building a Stripe Data Pipeline for Insights and Reporting
 
 ## 1. Understanding the Stripe API and Data Export Methods
@@ -24,44 +23,61 @@
 
 Dimensional modeling is a data modeling technique that is optimized for data warehousing and analytics. It is based on the concept of organizing data into "facts" and "dimensions."
 
-*   **Fact Tables:** Fact tables contain the quantitative data about a business process. In our case, this would be things like the amount of a charge, the amount of a refund, etc. Fact tables are typically very large and have a large number of rows.
-*   **Dimension Tables:** Dimension tables contain the descriptive attributes that are related to the facts. In our case, this would be things like the customer's name, the product name, the date of the transaction, etc. Dimension tables are typically smaller than fact tables and have a smaller number of rows.
+*   **Fact Tables:** These tables contain the quantitative measurements of business events (e.g., transaction amount, subscription MRR). They are generally long and narrow.
+*   **Dimension Tables:** These tables contain the descriptive attributes that provide context to the fact tables (e.g., customer details, product information, date attributes). They are generally wide and short.
 
 ### Proposed Data Model
 
-Here is a proposed data model for our Stripe data warehouse:
+Based on the principles of dimensional modeling, we propose the following data model for our Stripe data:
 
-**Fact Table: `transactions`**
+*   **fct_transactions:** A fact table that contains a record for every transaction in our Stripe account.
+*   **dim_customers:** A dimension table that contains information about our customers.
+*   **dim_products:** A dimension table that contains information about our products.
+*   **dim_dates:** A dimension table that contains a record for every day, which will allow us to easily aggregate data by different time periods.
 
-*   `transaction_id` (Primary Key)
-*   `charge_id` (Foreign Key to `charges`)
-*   `customer_id` (Foreign Key to `customers`)
-*   `product_id` (Foreign Key to `products`)
-*   `date_id` (Foreign Key to `dates`)
-*   `amount`
-*   `currency`
-*   `type` (e.g., charge, refund)
-*   `status` (e.g., succeeded, failed)
+## 3. Implementing the Data Pipeline
 
-**Dimension Table: `customers`**
+### Data Pipeline Architecture
 
-*   `customer_id` (Primary Key)
-*   `name`
-*   `email`
-*   `created_date`
+We will build a batch data pipeline that extracts data from the Stripe API on a daily basis and loads it into our data warehouse. This architecture is a good balance of simplicity, reliability, and cost-effectiveness.
 
-**Dimension Table: `products`**
+### Data Warehouse
 
-*   `product_id` (Primary Key)
-*   `name`
-*   `price`
-*   `created_date`
+We will use Google BigQuery as our data warehouse. BigQuery is a serverless, highly scalable, and cost-effective cloud data warehouse that is perfect for this use case.
 
-**Dimension Table: `dates`**
+### Workflow Orchestration
 
-*   `date_id` (Primary Key)
-*   `date`
-*   `day_of_week`
-*   `month`
-*   `quarter`
-*   `year`
+We will use Apache Airflow to orchestrate our data pipeline. Airflow is an open-source platform that allows you to programmatically author, schedule, and monitor workflows.
+
+## 4. Generating Insights and Reports
+
+### Key Metrics and Reports
+
+Once our data is in BigQuery, we will be able to generate a wide variety of insights and reports, including:
+
+*   **Monthly Recurring Revenue (MRR):** The total amount of recurring revenue that we can expect to receive each month.
+*   **Customer Lifetime Value (LTV):** The total amount of revenue that we can expect to generate from a single customer over the course of their relationship with our business.
+*   **Churn Rate:** The percentage of our customers who cancel their subscriptions each month.
+*   **Cohort Analysis:** A behavioral analytics tool that breaks down data into groups of people with common characteristics over time.
+
+### Business Intelligence (BI) Tool
+
+We will use Looker Studio to create interactive dashboards and visualizations from our data. Looker Studio is a free tool that allows you to easily create beautiful and informative reports.
+
+## 5. Testing and Maintaining the Data Pipeline
+
+### Testing Strategy
+
+We will implement a comprehensive testing strategy to ensure the quality and reliability of our data pipeline. This will include:
+
+*   **Unit tests:** To test individual components of our data pipeline in isolation.
+*   **Integration tests:** To test how different components of our data pipeline work together.
+*   **End-to-end tests:** To test the entire data pipeline from start to finish.
+
+### Data Quality Monitoring
+
+We will use a tool like dbt (data build tool) to test our data transformations and monitor the quality of our data. dbt allows you to write data quality tests in SQL and run them as part of your data pipeline.
+
+### Maintenance and Operations
+
+We will create a plan for monitoring and maintaining our data pipeline in production to ensure it continues to run smoothly. This will include setting up alerts to notify us of any failures and creating a runbook to document how to troubleshoot and resolve common issues.

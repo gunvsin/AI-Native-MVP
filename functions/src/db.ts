@@ -1,6 +1,5 @@
-
 import * as admin from 'firebase-admin';
-import { FinancialRecordSchema } from './schemas/financialDataSchema.js';
+import { FinancialRecordSchema } from './schemas/financialDataSchema';
 import { z } from 'zod';
 
 // Initialize Firebase Admin SDK

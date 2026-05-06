@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --config jest.config.js",
-    "build": "next build client",
+    "build": "npm run build --prefix client",
     "dev": "npm run dev --prefix client"
   },
   "keywords": [],
@@ -18,5 +18,9 @@
     "ts-jest": "^29.1.2",
     "typescript": "^5.9.3",
     "zod": "^4.4.2"
+  },
+  "dependencies": {
+    "@google-cloud/bigquery": "^8.3.0",
+    "stripe": "^22.1.0"
   }
 }

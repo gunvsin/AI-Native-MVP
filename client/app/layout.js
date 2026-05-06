@@ -3,7 +3,7 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
 import { useEffect } from 'react';
-import AxeAccessibility from '../components/AxeAccessibility'
+// import AxeAccessibility from '../components/AxeAccessibility'
 import NetworkModeToggle from '../components/NetworkModeToggle/NetworkModeToggle';
 import { initializeNetworkInterceptor } from '../lib/network-interceptor';
 
@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.className} sovereign-ledger`}>
-        <AxeAccessibility />
+        {/* <AxeAccessibility /> */}
         <NetworkModeToggle />
         {children}
       </body>

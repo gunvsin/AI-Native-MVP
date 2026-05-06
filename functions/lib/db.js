@@ -35,7 +35,7 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fetchFinancialData = exports.db = void 0;
 const admin = __importStar(require("firebase-admin"));
-const financialDataSchema_js_1 = require("./schemas/financialDataSchema.js");
+const financialDataSchema_1 = require("./schemas/financialDataSchema");
 // Initialize Firebase Admin SDK
 // This is a common practice to ensure it's initialized only once.
 if (admin.apps.length === 0) {
@@ -51,7 +51,7 @@ const fetchFinancialData = async () => {
     snapshot.forEach(doc => {
         const data = doc.data();
         // Ensure data is parsed and validated against the schema
-        const record = financialDataSchema_js_1.FinancialRecordSchema.parse(data);
+        const record = financialDataSchema_1.FinancialRecordSchema.parse(data);
         records.push(record);
     });
     return records;

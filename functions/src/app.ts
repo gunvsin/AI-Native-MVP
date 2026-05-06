@@ -3,7 +3,6 @@ import express from "express";
 import cors from "cors";
 import { sampleDataRouter } from "./sample-data-apis";
 import { createCheckoutSessionHandler } from "./checkout";
-import { getReasoningAudit } from "./feedback";
 import { syncStripeData } from "./stripe-sync";
 import { stripeWebhookHandler } from "./stripe-webhooks";
 
@@ -12,7 +11,7 @@ const app = express();
 app.use(cors({ origin: true }));
 
 app.use((req, res, next) => {
-  if (req.path === "/stripe-webhook") {
+  if (req.path.includes("/stripe-webhook")) {
     express.raw({ type: "application/json" })(req, res, (err) => {
       if (err) {
         return res.status(400).send("Invalid request body");
@@ -26,12 +25,7 @@ app.use((req, res, next) => {
 
 app.use("/v1", sampleDataRouter);
 app.post("/v1/create-checkout-session", createCheckoutSessionHandler);
-app.post("/stripe-webhook", stripeWebhookHandler as any);
-
-app.get("/reasoning-audit", async (req, res) => {
-  const auditData = await getReasoningAudit();
-  res.json(auditData);
-});
+app.post("/stripe-webhook", stripeWebhookHandler);
 
 app.post("/stripe-sync", async (req, res) => {
   try {
