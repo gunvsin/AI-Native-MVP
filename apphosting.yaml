@@ -3,3 +3,6 @@ runtime:
   cpu: 1
   memoryMiB: 512
   concurrency: 80
+env:
+  - variable: STRIPE_WEBHOOK_SECRET
+    secret: STRIPE_WEBHOOK_SECRET
